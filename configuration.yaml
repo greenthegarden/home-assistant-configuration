@@ -1,0 +1,360 @@
+---
+# Home Assistant Configuration
+# https://www.home-assistant.io/docs/configuration/
+
+# Home Assistant
+# https://home-assistant.io/docs/configuration/basic/
+# homeassistant: !include homeassistant.yaml
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+
+  # Location required to calculate the time the sun rises and sets
+  latitude: !secret home_latitude
+  longitude: !secret home_longitude
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: 45
+
+  # metric for Metric, imperial for Imperial
+  unit_system: metric
+  temperature_unit: C
+  # Select timezone from: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: !secret home_tz
+
+  customize: !include customize.yaml
+  # whitelist_external_dirs:
+  #   - /data/homeassistant
+  #   - /home/homeassistant/maps
+  # auth_providers: !include auth_providers.yaml
+  # external_url: !secret remote_base
+  # internal_url: !secret local_base
+  packages: !include_dir_named packages
+  # packages: !include_dir_merge_named packages
+
+# Default Config
+# Configure a default setup of Home Assistant (frontend, api, etc)
+# https://www.home-assistant.io/integrations/default_config/
+# default_config:
+
+# Average Sensor for Home Assistant
+# https://github.com/Limych/ha-average
+average:
+
+# Breaking Changes
+# https://github.com/custom-components/breaking_changes
+# breaking_changes:
+
+# Bureau of Meteorology (BOM) (Custom Component)
+# https://github.com/bremor/bureau_of_meteorology
+bureau_of_meteorology:
+
+# CalDAV
+# https://www.home-assistant.io/integrations/caldav/
+# Example configuration.yaml entry for nextcloud, calendars will be found automatically
+calendar:
+  - platform: caldav
+    username: !secret nextcloud_username
+    password: !secret nextcloud_password
+    url: http://192.168.1.51/nextcloud/remote.php/dav/
+
+# Camera
+# https://www.home-assistant.io/integrations/camera/
+# camera:
+#   # https://www.home-assistant.io/integrations/iss/#show-position-on-map-with-camera-platform
+#   - platform: generic
+#     name: ISS Map
+#     still_image_url: http://staticmap.openstreetmap.de/staticmap.php?center={{ state_attr('binary_sensor.iss', 'lat') }},{{ state_attr('binary_sensor.iss', 'long') }}&zoom=4&size=865x512&maptype=mapnik&markers={{ state_attr('binary_sensor.iss', 'lat') }},{{ state_attr('binary_sensor.iss', 'long') }},lightblue
+#     limit_refetch_to_url_change: true
+
+# - platform: mjpeg
+#   name: Security Camera
+#   mjpeg_url: http://192.168.1.70:8081
+#   verify_ssl: false
+
+# CLimacell Weather Provider
+# https://github.com/r-renato/ha-climacell-weather
+# climacell:
+
+# Enables configuration UI
+# https://www.home-assistant.io/integrations/config/
+config:
+
+# Conversation
+# Allows you to issue voice commands from the frontend in enabled browsers
+# https://www.home-assistant.io/integrations/conversation/
+# conversation:
+
+# Device Tracker
+# https://www.home-assistant.io/integrations/device_tracker/
+# https://www.home-assistant.io/integrations/nmap_tracker/
+device_tracker:
+  - platform: nmap_tracker
+    hosts: 192.168.1.0/24
+    # home_interval: 10
+    new_device_defaults:
+      track_new_devices: true
+
+# Discovery
+# Discover some devices automatically
+# https://www.home-assistant.io/integrations/discovery/
+discovery:
+
+# Garbage Collection
+# https://github.com/bruxy70/Garbage-Collection
+garbage_collection:
+
+# Global Disaster Alert and Coordination System (GDACS)
+# Information about major droughts, earthquakes, floods,
+# tropical cyclones, tsunamis and volcanic activities worldwide
+# https://www.home-assistant.io/integrations/gdacs/
+# radius in km, default is 500
+gdacs:
+  categories:
+    - Drought
+    - Earthquake
+    - Flood
+    # - Tropical Cyclone
+    - Tsunami
+    # - Volcano
+  radius: 1000
+  latitude: !secret home_latitude
+  longitude: !secret home_longitude
+
+# GeoJSON
+# Integrate GeoJSON feeds
+# https://www.home-assistant.io/integrations/geo_json_events/
+geo_location:
+  # U.S. Geological Survey Earthquake Hazards (USGS)
+  # https://www.home-assistant.io/integrations/usgs_earthquakes_feed/
+  - platform: usgs_earthquakes_feed
+    feed_type: "past_month_all_earthquakes"
+    radius: 50
+    minimum_magnitude: 0.0
+    latitude: !secret home_latitude
+    longitude: !secret home_longitude
+
+# History
+# Enables support for tracking state changes over time
+# https://www.home-assistant.io/integrations/history/
+history:
+
+# HTTP
+# Serves all files and data required for the Home Assistant frontend
+# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+# https://www.home-assistant.io/integrations/http/
+# http:
+#   base_url: example.duckdns.org:8123
+
+# InfluxDB
+# https://www.home-assistant.io/integrations/influxdb/
+# influxdb:
+#   host: 192.168.1.90
+# #  port:
+#   username: homeassistant
+#   password: homeassistant
+#   database: home_assistant
+#   # exclude:
+#   #   entities:
+#   #      - entity.id1
+#   #      - entity.id2
+#   #   domains:
+#   #      - automation
+#   # include:
+#   #   entities:
+#   #      - entity.id3
+#   #      - entity.id4
+#   tags:
+#     instance: home
+#     source: home-assistant
+
+# Introduction
+# Show links to resources in log and frontend
+#introduction:
+
+# Logbook
+# View all events in a logbook in reverse chronological order
+# https://www.home-assistant.io/integrations/logbook/
+logbook:
+
+# Logger
+# Define the level of logging activities
+# https://www.home-assistant.io/integrations/logger/
+logger:
+  default: warning
+
+# Lovelace UI
+# Enables the lovelace UI
+# lovelace:
+#   mode: yaml
+
+# Map
+# Enables a map showing the location of tracked devices
+# https://www.home-assistant.io/integrations/map/
+map:
+
+# Mobile App
+# Allows Home Assistant mobile apps to easily integrate with Home Assistant
+# https://www.home-assistant.io/integrations/mobile_app/
+mobile_app:
+
+# Monitor Docker
+# https://github.com/ualex73/monitor_docker
+# monitor_docker:
+
+# MQTT
+# https://www.home-assistant.io/docs/mqtt/
+mqtt:
+  client_id: home-assistant
+  broker: 192.168.1.53
+  port: 1883
+  # username: !secret mqtt_username
+  # password: !secret mqtt_password
+  discovery: true
+  discovery_prefix: homeassistant
+  birth_message:
+    topic: "hass/status"
+    payload: "online"
+  will_message:
+    topic: "hass/status"
+    payload: "offline"
+
+# Nextcloud
+# Pulls summary Nextcloud information into Home Assistant
+# https://www.home-assistant.io/integrations/nextcloud/
+# nextcloud:
+#   url: http://192.168.1.51/nextcloud/
+#   username: !secret nextcloud_username
+#   password: !secret nextcloud_password
+
+# Notifications
+# https://www.home-assistant.io/integrations/notify/
+# Notifier for Telegram
+# https://www.wouterbulten.nl/blog/tech/talking-to-my-house-telegram-homeassistant-bot/
+notify:
+  - name: telegram
+    platform: telegram
+    chat_id: !secret telegram_bot_main_chat_id
+
+# OpenNEM
+# https://github.com/bacco007/sensor.opennem
+opennem:
+
+# OpenUV
+# https://www.home-assistant.io/integrations/openuv/
+# from v 0.111 configured via UI
+# openuv:
+#   api_key: !secret openuv_api_key
+
+# Person
+# Enables Person Component
+# https://www.home-assistant.io/integrations/person/
+person:
+  - name: Philip
+    id: philip
+    user_id: c8500dd2d2f34a189b30d7f0190d9618
+    device_trackers:
+      # - device_tracker.f1f
+      - device_tracker.nokia_5_3
+  - name: Thanh
+    id: thanh
+    # user_id: 55f67b8c6c9d4ee484f4cc70f062dd5c
+    device_trackers:
+      - device_tracker.oppo_r15_pro_home_gateway
+
+# Pi-hole
+# Retrieve statistics and interact with a Pi-hole system
+# https://www.home-assistant.io/integrations/pi_hole/
+# pi_hole:
+#   - host: IP_ADDRESS
+
+# Prometheus
+# Exposes metrics in format for Prometheus
+# https://www.home-assistant.io/integrations/prometheus/
+# prometheus:
+
+# Recorder
+# Responsible for storing details in a database, which then are handled by the history integration.
+# https://www.home-assistant.io/integrations/recorder/
+# recorder:
+
+# Skyfield
+# https://github.com/partofthething/ha_skyfield
+# ha_skyfield:
+
+# Speedtest.net
+# Measure network bandwidth performance
+# https://www.home-assistant.io/integrations/speedtestdotnet/
+speedtestdotnet:
+  scan_interval:
+    minutes: 30
+  monitored_conditions:
+    - ping
+    - download
+    - upload
+
+# Sun
+# Track the sun
+# https://www.home-assistant.io/integrations/sun/
+sun:
+
+# Sun2
+# https://github.com/pnbruckner/ha-sun2
+sun2:
+
+# Synology DSM
+# Access to various statistics from a Synology NAS
+# https://www.home-assistant.io/integrations/synology_dsm/
+synology_dsm:
+  - host: 192.168.1.100
+    port: 5001
+    username: !secret synology_dsm_username
+    password: !secret synology_dsm_password
+
+# System Health
+# Provides an API to offer information on the system and its components
+# https://www.home-assistant.io/integrations/system_health/
+system_health:
+
+# Telegram notifications
+# https://www.home-assistant.io/integrations/telegram/
+# https://www.wouterbulten.nl/blog/tech/talking-to-my-house-telegram-homeassistant-bot/
+# telegram_bot: !include telegram.yaml
+telegram_bot:
+  - platform: polling
+    api_key: !secret telegram_bot_api_key
+    allowed_chat_ids: !secret telegram_bot_chat_ids
+
+# Text-to-Speech
+# https://www.home-assistant.io/integrations/#text-to-speech
+# tts:
+#   - platform: google_translate
+
+# IKEA TRÅDFRI (TRADFRI)
+# Allow connection of IKEA Trådfri Gateway
+# https://www.home-assistant.io/integrations/tradfri/
+tradfri:
+  host: 192.168.1.80
+
+# UI Logs
+# https://github.com/custom-components/uilogs
+# uilogs:
+
+# Updater
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+updater:
+  # Optional, allows Home Assistant developers to focus on popular components.
+  include_used_components: true
+
+# Zero-configuration networking (zeroconf)
+# https://www.home-assistant.io/integrations/zeroconf/
+# zeroconf:
+
+# External configuration items
+# https://www.home-assistant.io/docs/configuration/splitting_configuration/
+
+lovelace: !include lovelace.yaml
+zone: !include zone.yaml

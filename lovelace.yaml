@@ -1,0 +1,16 @@
+---
+# Enables the lovelace UI
+mode: yaml
+
+resources:
+  - url: /local/bom-radar-card.js
+    type: module
+
+  - url: /local/bom-weather-card.js?v=0.1
+    type: module
+
+  - url: /local/power-wheel-card.js?v=1
+    type: module
+
+  - url: /local/sun-card.js
+    type: module

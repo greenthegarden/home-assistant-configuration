@@ -1,0 +1,73 @@
+---
+# Package: Environment
+
+# Binary Sensors
+
+binary_sensor:
+
+# Sensors
+
+sensor:
+  # Average
+  # https://github.com/Limych/ha-average
+  - platform: average
+    name: "Average Temperature"
+    entities:
+      - sensor.adelaide_west_terrace_ngayirdapira_temp
+
+  # CO2 Signal
+  # CO2 intensity of a specific region
+  # https://www.home-assistant.io/integrations/co2signal/
+  - platform: co2signal
+    token: !secret co2signal_api_key
+    latitude: !secret home_latitude
+    longitude: !secret home_longitude
+
+  # World Air Quality Index
+  # https://www.home-assistant.io/integrations/waqi/
+  # sensor air_quality:
+  - platform: waqi
+    token: !secret waqi_token
+    locations:
+      - adelaide
+
+# Automations
+
+automation:
+  - alias: Update OpenUV every 30 minutes during the daytime
+    trigger:
+      platform: time_pattern
+      minutes: /30
+    condition:
+      condition: and
+      conditions:
+        - condition: sun
+          after: sunrise
+        - condition: sun
+          before: sunset
+    action:
+      service: openuv.update_data
+    id: 5d03a6cd6a4d406ea84798dd32334da2
+
+  - alias:
+      Update OpenUV every 20 minutes while the sun is at least 10 degrees above
+      the horizon
+    trigger:
+      platform: time_pattern
+      minutes: /20
+    condition:
+      condition: numeric_state
+      entity_id: sun.sun
+      value_template: "{{ state.attributes.elevation }}"
+      above: 10
+    action:
+      service: openuv.update_uv_index_data
+    id: 7b05d55a83d64a4ba2f83ac214191931
+
+  - alias: Update OpenUV protection window once a day
+    trigger:
+      platform: time
+      at: 02:12:00
+    action:
+      service: openuv.update_protection_data
+    id: 28147d54978246eca2b71d730b82a732

@@ -1,0 +1,150 @@
+---
+# Package: Celestial
+
+# Binary Sensors
+
+binary_sensor:
+
+# Sensors
+
+sensor:
+  # Sensors - Template:
+
+  # device_tracker.nokia_5_3
+  # device_tracker.192_168_1_7_tpgi_com_au
+  - platform: template
+    sensors:
+      chromecast:
+        friendly_name: Chromecast
+        value_template: >-
+          {% if is_state('device_tracker.chromecast_home_gateway', 'home') %}
+            Online
+          {% else %}
+            Offline
+          {% endif %}
+        icon_template: >-
+          {% if is_state('device_tracker.chromecast_home_gateway', 'home') %}
+            mdi:google-chrome
+          {% else %}
+            mdi:cloud-off-outline
+          {% endif %}
+
+      nextcloud:
+        friendly_name: Nextcloud
+        value_template: >-
+          {% if is_state('device_tracker.rpi_51', 'home') %}
+            Online
+          {% else %}
+            Offline
+          {% endif %}
+        icon_template: >-
+          {% if is_state('device_tracker.rpi_51', 'home') %}
+            mdi:file-cloud
+          {% else %}
+            mdi:cloud-off-outline
+          {% endif %}
+
+      emonpi:
+        friendly_name: EmonPi
+        value_template: >-
+          {% if is_state('device_tracker.rpi_52', 'home') %}
+            Online
+          {% else %}
+            Offline
+          {% endif %}
+        icon_template: >-
+          {% if is_state('device_tracker.rpi_52', 'home') %}
+            mdi:power-socket-au
+          {% else %}
+            mdi:cloud-off-outline
+          {% endif %}
+
+      enviro3:
+        friendly_name: Enviro+ 3
+        value_template: >-
+          {% if is_state('device_tracker.rpi_enviroplus_3', 'home') %}
+            Online
+          {% else %}
+            Offline
+          {% endif %}
+        icon_template: >-
+          {% if is_state('device_tracker.rpi_enviroplus_3', 'home') %}
+            mdi:home-thermometer
+          {% else %}
+            mdi:cloud-off-outline
+          {% endif %}
+
+      ikea_gateway:
+        friendly_name: IKEA Gateway
+        value_template: >-
+          {% if is_state('device_tracker.gw_44916024a9eb_home_gateway', 'home') %}
+            Online
+          {% else %}
+            Offline
+          {% endif %}
+        icon_template: >-
+          {% if is_state('device_tracker.gw_44916024a9eb_home_gateway', 'home') %}
+            mdi:router
+          {% else %}
+            mdi:cloud-off-outline
+          {% endif %}
+
+      storology:
+        friendly_name: Storology
+        value_template: >-
+          {% if is_state('device_tracker.192_168_1_100_tpgi_com_au', 'home') %}
+            Online
+          {% else %}
+            Offline
+          {% endif %}
+        icon_template: >-
+          {% if is_state('device_tracker.192_168_1_100_tpgi_com_au', 'home') %}
+            mdi:nas
+          {% else %}
+            mdi:cloud-off-outline
+          {% endif %}
+
+      printer:
+        friendly_name: Brother MFC-L2703DW
+        value_template: >-
+          {% if is_state('device_tracker.brwa8a79536739f_home_gateway', 'home') %}
+            Online
+          {% else %}
+            Offline
+          {% endif %}
+        icon_template: >-
+          {% if is_state('device_tracker.brwa8a79536739f_home_gateway', 'home') %}
+            mdi:printer-wireless
+          {% else %}
+            mdi:printer-off
+          {% endif %}
+
+      gateway:
+        friendly_name: Gateway
+        value_template: >-
+          {% if is_state('device_tracker.home_gateway_home_gateway', 'home') %}
+            Online
+          {% else %}
+            Offline
+          {% endif %}
+        icon_template: >-
+          {% if is_state('device_tracker.home_gateway_home_gateway', 'home') %}
+            mdi:wifi
+          {% else %}
+            mdi:wifi-off
+          {% endif %}
+
+      television:
+        friendly_name: Television
+        value_template: >-
+          {% if is_state('device_tracker.bravia944905ee64079052_home_gateway', 'home') %}
+            Online
+          {% else %}
+            Offline
+          {% endif %}
+        icon_template: >-
+          {% if is_state('device_tracker.bravia944905ee64079052_home_gateway', 'home') %}
+            mdi:television
+          {% else %}
+            mdi:television-off
+          {% endif %}

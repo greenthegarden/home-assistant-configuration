@@ -1,0 +1,87 @@
+---
+title: Irrigation
+icon: mdi:water
+cards:
+  - type: entities
+    title: Mode
+    entities:
+      # - binary_sensor.irrigation_mode
+      - input_boolean.irrigation_mode_select
+  - type: conditional
+    conditions:
+      - entity: input_boolean.irrigation_mode_select
+        state: "on"
+    card:
+      type: entities
+      title: Lawn
+      entities:
+        - input_number.irrigation_duration_lawn
+        - input_datetime.irrigation_time_lawn
+        - input_number.irrigation_interval_lawn
+        - counter.irrigation_days_counter_lawn
+        - input_boolean.irrigation_state_lawn
+  - type: conditional
+    conditions:
+      - entity: input_boolean.irrigation_mode_select
+        state: "on"
+    card:
+      type: entities
+      title: Shrubs
+      entities:
+        - input_number.irrigation_duration_shrubs
+        - input_datetime.irrigation_time_shrubs
+        - input_number.irrigation_interval_shrubs
+        - counter.irrigation_days_counter_shrubs
+        - input_boolean.irrigation_state_shrubs
+  - type: conditional
+    conditions:
+      - entity: input_boolean.irrigation_mode_select
+        state: "on"
+    card:
+      type: entities
+      title: Trees
+      entities:
+        - input_number.irrigation_duration_trees
+        - input_datetime.irrigation_time_trees
+        - input_number.irrigation_interval_trees
+        - counter.irrigation_days_counter_trees
+        - input_boolean.irrigation_state_trees
+  - type: conditional
+    conditions:
+      - entity: input_boolean.irrigation_mode_select
+        state: "on"
+    card:
+      type: entities
+      title: Vegetables
+      entities:
+        - input_number.irrigation_duration_vegetables
+        - input_datetime.irrigation_time_vegetables
+        - input_number.irrigation_interval_vegetables
+        - counter.irrigation_days_counter_vegetables
+        - input_boolean.irrigation_state_vegetables
+  - type: conditional
+    conditions:
+      - entity: input_boolean.irrigation_mode_select
+        state: "off"
+    card:
+      type: entities
+      title: Irrigation Zone
+      entities:
+        - input_select.irrigation_zone
+        - input_number.irrigation_duration_manual
+        - input_boolean.irrigation_run_manual
+  - type: entities
+    title: Master Relay
+    entities:
+      - input_boolean.irrigation_use_master_relay
+      - input_number.irrigation_master_relay
+  # - type: entities
+  #   title: Status
+  #   entities:
+  #     - input_boolean.irrigation_connected
+  #     - input_datetime.irrigation_status_uptime
+  #     - input_number.irrigation_status_memory
+  #     - last status updates
+  #     - last connected
+  #     - status interval
+  #     - ip address

@@ -1,0 +1,99 @@
+---
+# Package: Irrigation/Lawn
+
+# Input Boolean
+# https://www.home-assistant.io/integrations/input_boolean/
+
+input_boolean:
+  irrigation_state_lawn:
+    name: State
+    initial: false
+
+# Counters
+# Count occurrences fired by automations
+# https://www.home-assistant.io/integrations/counter
+
+counter:
+  irrigation_days_counter_lawn:
+    name: Day counter
+    initial: 0
+    restore: true
+    step: 1
+
+# Input Datetime
+# https://www.home-assistant.io/integrations/input_datetime/
+
+input_datetime:
+  irrigation_time_lawn:
+    name: Start Time
+    has_time: true
+    has_date: false
+    icon: mdi:clock-outline
+    initial: "18:00:00"
+
+  # https://community.home-assistant.io/t/count-days-since-last-time/90427/4
+  irrigation_last_run_lawn:
+    name: Last Run
+    has_date: true
+    has_time: true
+    icon: mdi:clock-outline
+
+# Input Number
+# https://www.home-assistant.io/integrations/input_number/
+
+input_number:
+  irrigation_interval_lawn:
+    name: Interval
+    min: 1
+    max: 14
+    initial: 3
+    step: 1
+    mode: slider
+    unit_of_measurement: days
+    icon: mdi:timer
+
+  irrigation_duration_lawn:
+    name: Duration
+    min: 15
+    max: 45
+    initial: 30
+    step: 5
+    mode: slider
+    unit_of_measurement: minutes
+    icon: mdi:timer
+
+# Automations
+
+automation:
+  - alias: Irrigation day counter lawn
+    trigger:
+      platform: template
+      value_template: >
+        {{ ( states('sensor.time') == (state_attr('input_datetime.irrigation_time_lawn', 'timestamp') | int) | timestamp_custom('%H:%M', False)) }}
+    action:
+      service: counter.increment
+      entity_id: counter.irrigation_days_counter_lawn
+    id: irrigation_day_counter_lawn
+
+  - alias: Irrigation on lawn
+    trigger:
+      platform: template
+      value_template: >
+        {{ states('counter.irrigation_days_counter_lawn') | int >= states('input_number.irrigation_interval_lawn') | int }}
+    condition:
+      condition: state
+      entity_id: input_boolean.irrigation_mode_select
+      state: "on"
+    action:
+      - service: counter.reset
+        entity_id: counter.irrigation_days_counter_lawn
+      - service: input_boolean.turn_on
+        entity_id: input_boolean.irrigation_state_lawn
+      - service: notify.telegram
+        data:
+          message: Irrigation on lawn
+    # - service: mqtt.publish
+    #   data:
+    #     topic: relayduino/control/relay
+    #     payload: 1,1
+    id: irrigation_on_lawn

@@ -1,0 +1,53 @@
+---
+# Package: Celestial
+
+# Binary Sensors
+
+binary_sensor:
+  # Sun2
+  # https://github.com/pnbruckner/ha-sun2
+  - platform: sun2
+    monitored_conditions:
+      - elevation
+      - elevation: 3
+      - elevation:
+          above: -6
+          name: Above Civil Dawn
+
+# Sensors
+
+sensor:
+  # Moon phases
+  # https://www.home-assistant.io/integrations/moon/
+  #sensor moon:
+  - platform: moon
+
+  # Season
+  # https://www.home-assistant.io/integrations/season/
+  - platform: season
+
+  # Sun2
+  # https://github.com/pnbruckner/ha-sun2
+  - platform: sun2
+    monitored_conditions:
+      - solar_midnight
+      - astronomical_dawn
+      - nautical_dawn
+      - dawn
+      - sunrise
+      - solar_noon
+      - sunset
+      - dusk
+      - nautical_dusk
+      - astronomical_dusk
+      - daylight
+      - civil_daylight
+      - nautical_daylight
+      - astronomical_daylight
+      - night
+      - civil_night
+      - nautical_night
+      - astronomical_night
+      - elevation
+      - min_elevation
+      - max_elevation

@@ -1,0 +1,99 @@
+---
+# Package: Irrigation/Trees
+
+# Input Boolean
+# https://www.home-assistant.io/integrations/input_boolean/
+
+input_boolean:
+  irrigation_state_trees:
+    name: State
+    initial: false
+
+# Counters
+# Count occurrences fired by automations
+# https://www.home-assistant.io/integrations/counter
+
+counter:
+  irrigation_days_counter_trees:
+    name: Day counter
+    initial: 0
+    restore: true
+    step: 1
+
+# Input Datetime
+# https://www.home-assistant.io/integrations/input_datetime/
+
+input_datetime:
+  irrigation_time_trees:
+    name: Start Time
+    has_time: true
+    has_date: false
+    icon: mdi:clock-outline
+    initial: "08:00:00"
+
+  # https://community.home-assistant.io/t/count-days-since-last-time/90427/4
+  irrigation_last_run_trees:
+    name: Last Run
+    has_date: true
+    has_time: true
+    icon: mdi:clock-outline
+
+# Input Number
+# https://www.home-assistant.io/integrations/input_number/
+
+input_number:
+  irrigation_interval_trees:
+    name: Interval
+    min: 1
+    max: 14
+    initial: 14
+    step: 1
+    mode: slider
+    unit_of_measurement: days
+    icon: mdi:timer
+
+  irrigation_duration_trees:
+    name: Duration
+    min: 30
+    max: 240
+    initial: 120
+    step: 15
+    mode: slider
+    unit_of_measurement: minutes
+    icon: mdi:timer
+
+# Automations
+
+automation:
+  - alias: Irrigation day counter trees
+    trigger:
+      platform: template
+      value_template: >
+        {{ ( states('sensor.time') == (state_attr('input_datetime.irrigation_time_trees', 'timestamp') | int) | timestamp_custom('%H:%M', False)) }}
+    action:
+      service: counter.increment
+      entity_id: counter.irrigation_days_counter_trees
+    id: irrigation_day_counter_trees
+
+  - alias: Irrigation on trees
+    trigger:
+      platform: template
+      value_template: >
+        {{ states('counter.irrigation_days_counter_trees') | int >= states('input_number.irrigation_interval_trees') | int }}
+    condition:
+      condition: state
+      entity_id: input_boolean.irrigation_mode_select
+      state: "on"
+    action:
+      - service: counter.reset
+        entity_id: counter.irrigation_days_counter_trees
+      - service: input_boolean.turn_on
+        entity_id: input_boolean.irrigation_state_trees
+      - service: notify.telegram
+        data:
+          message: Irrigation on trees
+    # - service: mqtt.publish
+    #   data:
+    #     topic: relayduino/control/relay
+    #     payload: 1,1
+    id: irrigation_on_trees

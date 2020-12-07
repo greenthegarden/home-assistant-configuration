@@ -1,0 +1,62 @@
+---
+# Package: Lights
+
+# Binary Sensors
+
+binary_sensor:
+
+# Sensors
+
+sensor:
+
+# Automations
+
+automation:
+  # device_tracker.device_tracker.nokia_5_3 (Philip's Phone)
+  - alias: Turn porch light on when returning home
+    description: "Turn porch light on when returning home"
+    trigger:
+      - platform: state
+        entity_id: device_tracker.nokia_5_3
+        from: "not_home"
+        to: "home"
+    condition:
+      # an hour after sunset to midnight
+      - condition: sun
+        after: sunset
+        after_offset: "+01:00:00"
+    action:
+      # IKEA porch light device from .storage/core.device_registry
+      - device_id: e629a6160ee94770867e56b37b322a19
+        domain: light
+        entity_id: light.light
+        type: turn_on
+      - service: timer.start
+        data:
+          entity_id: timer.front_porch_light
+      - service: notify.telegram
+        data:
+          message: Porch light on
+    id: porch_light_on_with_timer
+
+  - alias: Turn porch light off after front_porch_light duration
+    trigger:
+      platform: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.front_porch_light
+    action:
+      - device_id: e629a6160ee94770867e56b37b322a19
+        domain: light
+        entity_id: light.light
+        type: turn_off
+      - service: notify.telegram
+        data:
+          message: Porch light off
+    id: porch_light_off_timer
+
+  # Timer
+
+timer:
+  front_porch_light:
+    duration: "00:01:00"

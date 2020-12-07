@@ -1,0 +1,66 @@
+---
+title: Persons
+icon: mdi:account-multiple
+cards:
+  - type: vertical-stack
+    cards:
+      - type: entities
+        title: Philip
+        entities:
+          - entity: person.philip
+            name: Philip
+          - entity: sensor.skin_type_1_safe_exposure_time
+            name: UV safe exposure time
+          - entity: input_boolean.philip_home
+            name: At home
+          - entity: input_boolean.philip_bed
+            name: In bed
+      - type: entities
+        title: Devices
+        entities:
+          - entity: sensor.philip_laptop
+          - entity: sensor.philip_phone
+      - type: entities
+        title: Phone
+        entities:
+          - entity: sensor.nokia_5_3_battery_level
+            name: Battery Level
+          - entity: sensor.nokia_5_3_battery_state
+            name: Battery State
+          - entity: sensor.nokia_5_3_charger_type
+            name: Charger Type
+          - entity: sensor.nokia_5_3_do_not_disturb_sensor
+            name: Do not disturb sensor
+          - entity: sensor.nokia_5_3_internal_storage
+            name: Internal Storage
+          - entity: binary_sensor.nokia_5_3_is_charging
+            name: Is charging
+          - entity: sensor.nokia_5_3_last_reboot
+            name: Last reboot
+          # - entity: sensor.nokia_5_3_light_sensor
+          #   name: Light sensor
+          # - entity: sensor.nokia_5_3_proximity_sensor
+          #   name: Proximity sensor
+          - entity: sensor.nokia_5_3_ringer_mode
+            name: Ringer mode
+
+  - type: vertical-stack
+    cards:
+      - type: entities
+        title: Thanh
+        entities:
+          - entity: person.thanh
+            name: Thanh
+          - entity: sensor.skin_type_5_safe_exposure_time
+            name: UV safe exposure time
+      - type: entities
+        entities:
+          - entity: input_boolean.thanh_home
+      - type: entities
+        entities:
+          - entity: input_boolean.thanh_bed
+      - type: entities
+        title: Devices
+        entities:
+          - entity: sensor.thanh_ipad
+          - entity: sensor.thanh_laptop

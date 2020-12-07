@@ -1,0 +1,46 @@
+---
+title: Health
+icon: mdi:medical-bag
+cards:
+  - type: vertical-stack
+    cards:
+      - type: entities
+        title: Coronavirus in Australia
+        entities:
+          - entity: sensor.australia_coronavirus_confirmed
+            name: Confirmed Cases
+          - entity: sensor.australia_coronavirus_current
+            name: Current Cases
+          - entity: sensor.australia_coronavirus_deaths
+            name: Deaths
+          - entity: sensor.australia_coronavirus_recovered
+            name: Recovered
+      - type: history-graph
+        # title: Australia Coronavirus Cases
+        hours_to_show: 80
+        entities:
+          - entity: sensor.australia_coronavirus_current
+            name: Current
+          - entity: sensor.australia_coronavirus_confirmed
+            name: Confirmed
+  - type: vertical-stack
+    cards:
+      - type: entities
+        title: Coronavirus Worldwide
+        entities:
+          - entity: sensor.worldwide_coronavirus_confirmed
+            name: Confirmed Cases
+          - entity: sensor.worldwide_coronavirus_current
+            name: Current Cases
+          - entity: sensor.worldwide_coronavirus_deaths
+            name: Deaths
+          - entity: sensor.worldwide_coronavirus_recovered
+            name: Recovered
+      - type: history-graph
+        # title: Worldwide Coronavirus Cases
+        hours_to_show: 80
+        entities:
+          - entity: sensor.worldwide_coronavirus_current
+            name: Current
+          - entity: sensor.worldwide_coronavirus_confirmed
+            name: Confirmed

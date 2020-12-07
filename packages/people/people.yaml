@@ -1,0 +1,37 @@
+---
+# Package: People/People
+
+# Binary Sensors
+
+binary_sensor:
+  # Binary Sensors - Template:
+
+  - platform: template
+    sensors:
+      people_home:
+        value_template: >-
+          {{ is_state('input_boolean.philip_home', 'on')
+            or is_state('input_boolean.thanh_home', 'on') }}
+
+# Input Boolean
+
+input_boolean:
+
+# Automations
+
+automation:
+  - alias: at_home
+    description: People at home
+    trigger:
+      - entity_id: binary_sensor.people_home
+        platform: state
+    action:
+      - service: notify.telegram
+        data_template:
+          message: >
+            {% if is_state('binary_sensor.people_home', 'on') %}
+              'Both home'
+            {% else %}
+              'No one home'
+            {% endif %}
+    id: at_home

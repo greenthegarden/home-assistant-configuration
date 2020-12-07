@@ -1,0 +1,130 @@
+---
+# Package: Energy
+
+# Customize
+
+homeassistant:
+  customize:
+    # EmonCMS
+    sensor.emoncms_import:
+      icon: mdi:transmission-tower
+    sensor.emoncms_solar:
+      icon: mdi:solar-power
+    sensor.emoncms_use:
+      icon: mdi:power-socket-au
+    sensor.emoncms2_vrms:
+      icon: mdi:current-ac
+
+    # OpenNEM
+    sensor.opennem_sa1_battery_current_price:
+      friendly_name: Price
+    sensor.opennem_sa1_electricity_generation:
+      friendly_name: Eletricity Generation
+    sensor.opennem_sa1_electricity_demand:
+      friendly_name: Eletricity Demand
+    sensor.opennem_sa1_exported_power:
+      friendly_name: Exported Power
+    sensor.opennem_sa1_imported_power:
+      friendly_name: Imported Power
+    sensor.opennem_sa1_gen_from_renewables:
+      friendly_name: Generation from Renewables
+    sensor.opennem_sa1_gen_from_fossil_fuels:
+      friendly_name: Generation from Fossil Fuels
+    sensor.opennem_sa1_battery_charging:
+      friendly_name: Battery (Charging)
+    sensor.opennem_sa1_battery_discharging:
+      friendly_name: Battery (Discharging)
+    sensor.opennem_sa1_solar_rooftop:
+      friendly_name: Solar Rooftop
+    sensor.opennem_sa1_solar_utility:
+      friendly_name: Solar Utility
+    sensor.opennem_sa1_wind:
+      friendly_name: Wind
+
+# Binary Sensors
+
+binary_sensor:
+
+# Sensors
+
+sensor:
+  # EmonCMS
+  # Creates sensors for the feeds available in your local or cloud based version of Emoncms.
+  # https://www.home-assistant.io/integrations/emoncms/
+  # Power measurements
+  - platform: emoncms
+    api_key: 2a26b441a967b9e96d362a3973c13152
+    url: http://192.168.1.52/emoncms
+    # url: https://emoncms.org
+    scan_interval: 30
+    id: 1
+    unit_of_measurement: "W"
+    include_only_feed_id:
+      - 1
+      - 2
+      - 6
+    # sensor_names:
+    #   1: "emonpi_use_watts"
+    #   2: "emonpi_solar_watts"
+    #   6: "emonpi_import_watts"
+  # Voltage measurements
+  - platform: emoncms
+    api_key: 2a26b441a967b9e96d362a3973c13152
+    url: http://192.168.1.52/emoncms
+    # url: https://emoncms.org
+    id: 2
+    scan_interval: 60
+    unit_of_measurement: "V"
+    include_only_feed_id:
+      - 5
+    # sensor_names:
+    #   5: "emonpi_vrms_volts"
+
+  # OpenNEM
+  # https://github.com/bacco007/sensor.opennem
+  - platform: opennem
+    region: sa1
+    monitored_conditions:
+      - battery_charging
+      - battery_discharging
+      - biomass
+      - black_coal
+      - brown_coal
+      - exports
+      - demand
+      - distillate
+      - fossilfuel
+      - renewables
+      - gas_ccgt
+      - gas_ocgt
+      - gas_recip
+      - gas_steam
+      - generation
+      - hydro
+      - imports
+      - price
+      - pumps
+      - rooftop_solar
+      - solar
+      - temperature
+      - wind
+
+  # Sensors - Template:
+
+  - platform: template
+    sensors:
+      solar_power:
+        friendly_name: "Solar power production"
+        unit_of_measurement: "W"
+        value_template: >-
+          {{ state_attr("sensor.emoncms_solar", "pwr") }}
+      grid_power_consumption:
+        friendly_name: "Grid power consumption"
+        unit_of_measurement: "W"
+        value_template: >-
+          {{ (1000 * (states("sensor.power_consumption") | float)) | int }}
+      grid_power_production:
+        friendly_name: "Grid power production"
+        unit_of_measurement: "W"
+        value_template: >-
+          {{ (1000 * (states("sensor.power_production") | float)) | int }}

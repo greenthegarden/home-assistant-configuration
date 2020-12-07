@@ -1,0 +1,23 @@
+# do not keep surplus vscode files
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+
+# Whitelist files/folders
+!*.yaml
+!.gitignore
+!*.md
+
+# home-assistant files
+.cloud
+.storage
+.HA_VERSION
+.uuid
+secrets.yaml
+known_devices.yaml
+home-assistant_v2.db
+home-assistant.log
+
+# ignore Python generated files
+__pycache__/*
+*.pyc

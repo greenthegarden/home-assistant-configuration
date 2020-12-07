@@ -1,0 +1,104 @@
+---
+# Package: APC UPS
+
+# Customize
+
+homeassistant:
+  customize:
+    sensor.battery_runtime_mins:
+      icon: mdi:timer
+# Group
+
+# group:
+
+# Sensors
+
+# Nut Server
+# Monitor a UPS (battery backup) by using data from a NUT (Network UPS Tools) server
+# https://www.home-assistant.io/integrations/nut/
+# For APC Back-UPS ES550 unit, following is configuration for NUT server
+# users:
+#   - username: nut
+#     password: hassionutserver
+#     instcmds:
+#       - all
+#     actions: []
+# devices:
+#   - name: myups
+#     driver: usbhid-ups
+#     desc: APC Back-UPS ES550
+#     port: auto
+#     config:
+#       - vendorid = 051d*
+# mode: netserver
+# shutdown_host: 'false'
+# list_usb_devices: true
+# log_level: debug
+# - platform: nut
+#   name: APC Back-UPS ES550
+#   alias: myups
+#   host: a0d7b954-nut
+#   port: 3493
+#   username: !secret nut_server_username
+#   password: !secret nut_server_password
+#   resources:
+#     - battery.charge
+#     # - battery.charge.low
+#     # - battery.charge.warning
+#     - battery.chemistry
+#     - battery.date
+#     - battery.manuf.date
+#     # - battery.mfr.ups.serial
+#     - battery.runtime
+#     # - battery.runtime.low
+#     # - battery.type
+#     - battery.voltage
+#     # - battery.voltage.nominal
+#     # - input.sensitivity
+#     - input.transfer.high
+#     - input.transfer.low
+#     - input.transfer.reason
+#     - input.voltage
+#     - input.voltage.nominal
+#     - output.current
+#     - output.frequency
+#     - output.voltage
+#     - output.voltage.nominal
+#     - ups.beeper.status
+#     - ups.delay.shutdown
+#     - ups.firmware
+#     - ups.firmware.aux
+#     - ups.load
+#     - ups.load.reboot.timer
+#     - ups.load.shutdown.timer
+#     - ups.mfr
+#     - ups.mfr.ups.status
+#     - ups.model
+#     - ups.productid
+#     - ups.realpower.nominal
+#     - ups.status.display
+#     - ups.timer.reboot
+#     - ups.timer.shutdown
+#     - ups.vendorid
+# sensor:
+#   - platform: nut
+#     name: APC UPS
+#     username: apc
+#     password: apc
+#     resources:
+#       - ups.load
+#       - ups.status
+#       - battery.voltage
+#       - ups.realpower.nominal
+#       - battery.charge.warning
+#       - battery.charge.low
+#       - battery.runtime
+#       - battery.charge
+#       - output.current
+
+#   - platform: template
+#     sensors:
+#       battery_runtime_mins:
+#         friendly_name: "Battery Runtime"
+#         value_template: "{{ (states('sensor.apc_ups_battery_runtime')|float / 60 ) | round() }}"
+#         unit_of_measurement: 'Mins'

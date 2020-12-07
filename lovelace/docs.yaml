@@ -1,0 +1,32 @@
+---
+title: Documentation
+icon: mdi:help-circle-outline
+cards:
+  - type: entities
+    title: Links
+    show_header_toggle: false
+    entities:
+      - type: weblink
+        name: Home Assistant
+        url: https://home-assistant.io
+        icon: mdi:home-assistant
+      - type: weblink
+        name: Configuring Home Assistant
+        url: https://home-assistant.io/getting-started/configuration/
+        icon: mdi:assistant
+      - type: weblink
+        name: Available Components
+        url: https://home-assistant.io/components/
+        icon: mdi:briefcase-check
+      - type: weblink
+        name: Troubleshooting your configuration
+        url: https://home-assistant.io/docs/configuration/troubleshooting/
+        icon: mdi:wrench
+      - type: weblink
+        name: Getting Help
+        url: https://home-assistant.io/help/
+        icon: mdi:help
+      - type: weblink
+        name: Home Assistant Forum
+        url: https://community.home-assistant.io
+        icon: mdi:comment-multiple-outline

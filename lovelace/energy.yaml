@@ -1,0 +1,102 @@
+---
+title: Energy
+icon: mdi:solar-power
+cards:
+  - type: custom:power-wheel-card
+    title_power: "Power distribution"
+    title_energy: "Energy distribution"
+    title_money: "Energy costs/savings"
+    solar_power_entity: sensor.emoncms_solar
+    grid_power_entity: sensor.emoncms_import
+    production_is_positive: true
+    solar_energy_entity: sensor.emoncms_solar
+    grid_energy_consumption_entity: sensor.emoncms_import
+    grid_energy_production_entity: sensor.emoncms_use
+    energy_consumption_rate: 0.20
+    energy_production_rate: 0.15
+    money_unit: "$"
+    solar_icon: "mdi:white-balance-sunny"
+    grid_icon: "mdi:flash"
+    home_icon: "mdi:home-assistant"
+    power_decimals: 2
+    energy_decimals: 2
+    money_decimals: 0
+    color_icons: true
+    consuming_color: "#33ff33"
+    producing_color: "#dd5500"
+    invert_grid_colors: false
+    active_arrow_color: "#ffff00"
+    initial_view: "energy"
+    initial_auto_toggle_view: true
+    auto_toggle_view_period: 5
+  - type: vertical-stack
+    cards:
+      - type: entities
+        title: AC Power
+        entities:
+          - entity: sensor.emoncms_import
+            name: Import
+          - entity: sensor.emoncms_solar
+            name: Solar
+          - entity: sensor.emoncms_use
+            name: Use
+          # - entity: sensor.emoncms_import_kwh
+          #   name: Import
+          # - entity: sensor.emoncms_solar_kwh
+          # - entity: sensor.emoncms_use_kwh
+          - entity: sensor.emoncms2_vrms
+            name: Voltage
+      - type: history-graph
+        # title: AC Power
+        hours_to_show: 24
+        entities:
+          - entity: sensor.emoncms_import
+            name: Import
+          - entity: sensor.emoncms_solar
+            name: Solar
+          - entity: sensor.emoncms_use
+            name: Use
+      - type: history-graph
+        # title: AC Voltage
+        hours_to_show: 24
+        entities:
+          - entity: sensor.emoncms2_vrms
+            name: Voltage
+      - type: entities
+        title: South Australia Energy
+        entities:
+          - entity: sensor.opennem_sa1_battery_charging
+          - entity: sensor.opennem_sa1_battery_discharging
+          # - entity: sensor.opennem_sa1_biomass
+          # - entity: sensor.opennem_sa1_black_coal
+          # - entity: sensor.opennem_sa1_brown_coal
+          - entity: sensor.opennem_sa1_current_price
+          # - entity: sensor.opennem_sa1_distillate
+          - entity: sensor.opennem_sa1_electricity_demand
+          - entity: sensor.opennem_sa1_electricity_generation
+          - entity: sensor.opennem_sa1_exported_power
+          # - entity: sensor.opennem_sa1_gas_ccgt
+          # - entity: sensor.opennem_sa1_gas_ocgt
+          # - entity: sensor.opennem_sa1_gas_recip
+          # - entity: sensor.opennem_sa1_gas_steam
+          - entity: sensor.opennem_sa1_gen_from_fossil_fuels
+          - entity: sensor.opennem_sa1_gen_from_renewables
+          # - entity: sensor.opennem_sa1_hydro
+          - entity: sensor.opennem_sa1_imported_power
+          # - entity: sensor.opennem_sa1_pumps
+          - entity: sensor.opennem_sa1_solar_rooftop
+          - entity: sensor.opennem_sa1_solar_utility
+          - entity: sensor.opennem_sa1_temperature
+          - entity: sensor.opennem_sa1_wind
+  - type: vertical-stack
+    cards:
+      - type: entities
+        title: Local CO2 Intensity
+        entities:
+          - entity: sensor.co2_intensity_34_89_138_63
+            name: CO2 Intensity
+      - type: sensor
+        entity: sensor.co2_intensity_34_89_138_63
+        name: CO2 Intensity
+        graph: line
+        hours_to_show: 40

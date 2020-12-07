@@ -1,0 +1,16 @@
+---
+# Lovelace User Interface
+# https://www.home-assistant.io/lovelace/
+
+title: Home
+# background:
+views:
+  - !include lovelace/home.yaml
+  - !include lovelace/persons.yaml
+  - !include lovelace/environment.yaml
+  - !include lovelace/energy.yaml
+  - !include lovelace/irrigation.yaml
+  - !include lovelace/system.yaml
+  # - !include lovelace/automations.yaml
+  - !include lovelace/health.yaml
+  - !include lovelace/docs.yaml

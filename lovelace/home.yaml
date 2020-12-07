@@ -1,0 +1,134 @@
+---
+# id: home
+title: Home
+icon: mdi:home-assistant
+cards:
+  - type: entities
+    title: At home
+    entities:
+      - entity: binary_sensor.people_home
+        name: People home
+  - type: light
+    name: Porch Light
+    entity: light.light
+  - type: vertical-stack
+    cards:
+      - type: entities
+        title: Date and Time
+        entities:
+          - entity: sensor.date_template
+          - entity: sensor.time
+            name: Time
+          - entity: sensor.time_utc
+            name: Time (UTC)
+          - entity: binary_sensor.workday_sensor
+            name: Workday
+          - entity: sensor.period_of_day
+            name: Period of Day
+          - entity: sensor.season
+            name: Season
+          - entity: sensor.moon
+            name: Moon
+          - entity: sun.sun
+            name: Sun
+      - type: glance
+        # title: World Times
+        entities:
+          - entity: sensor.time_in_auckland
+            name: Auckland
+          - entity: sensor.time_in_london
+            name: London
+          - entity: sensor.time_in_perth
+            name: Perth
+      # - type: entities
+      #   # title: Celestial
+      #   entities:
+      #     - entity: sensor.season
+      #       name: Season
+      #     - entity: sensor.moon
+      #       name: Moon
+      #     - entity: sun.sun
+      #       name: Sun
+      #     # - entity: binary_sensor.iss
+      #     #   name: ISS Visible
+  - type: weather-forecast
+    entity: weather.marden
+  # - type: picture-entity
+  #   entity: camera.iss_map
+  # - type: entities
+  #   title: Indoor Air Quality
+  #   entities:
+  #     - entity: sensor.enviro_3_gas_oxidising
+  #       name: Oxidising
+  #     - entity: sensor.enviro_3_gas_reducing
+  #       name: Reducing
+  #     - entity: sensor.enviro_3_gas_nh3
+  #       name: NH3
+  - type: vertical-stack
+    cards:
+      - type: entities
+        title: Indoor Conditions
+        entities:
+          - entity: sensor.enviro_3_bme280_temperature
+            name: Temperature
+          - entity: sensor.enviro_3_bme280_humidity
+            name: Humidity
+          - entity: sensor.enviro_3_bme280_pressure
+            name: Pressure
+          # - entity: sensor.mold_indicator
+          #   name: Mold Indicator
+      - type: entities
+        # title: Indoor Air Quality
+        entities:
+          - entity: input_boolean.windows_open
+      - type: entities
+        # title: Indoor Air Quality
+        entities:
+          - entity: input_boolean.heater_on
+      - type: history-graph
+        # title: Indoor Air Quality
+        hours_to_show: 24
+        entities:
+          - entity: sensor.enviro_3_gas_oxidising
+            name: Oxidising
+          - entity: sensor.enviro_3_gas_reducing
+            name: Reducing
+          - entity: sensor.enviro_3_gas_nh3
+            name: NH3
+  - type: history-graph
+    title: Temperature
+    hours_to_show: 2
+    entities:
+      - entity: sensor.enviro_3_bme280_temperature
+        name: Indoor
+  - type: sensor
+    entity: sensor.current_uv_index
+    name: UV Index
+    graph: line
+    hours_to_show: 12
+  - type: media-control
+    entity: media_player.castology
+  - type: entities
+    title: Device Access Links
+    show_header_toggle: false
+    entities:
+      - type: weblink
+        name: Nextcloud
+        url: http://192.168.1.51/nextcloud
+        icon: mdi:file-cloud
+      - type: weblink
+        name: EmonPi
+        url: http://192.168.1.52/emoncms/app/view
+        icon: mdi:power-socket-au
+      - type: weblink
+        name: Storology
+        url: http://192.168.1.100:5001
+        icon: mdi:nas
+      - type: weblink
+        name: Printer
+        url: http://192.168.1.200
+        icon: mdi:printer-wireless
+      - type: weblink
+        name: Gateway
+        url: http://192.168.1.254:89
+        icon: mdi:wifi

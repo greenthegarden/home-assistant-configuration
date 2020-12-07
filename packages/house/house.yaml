@@ -1,0 +1,80 @@
+---
+# Package: House
+
+# Binary Sensors
+
+binary_sensor:
+
+# Sensors
+
+sensor:
+  # MQTT Sensor
+  # https://www.home-assistant.io/integrations/sensor.mqtt/
+
+  # Enviro+ Module 3 Climate Measurements
+  - platform: mqtt
+    name: Enviro+ 3 BME280 Temperature
+    state_topic: "homeassistant/sensor/enviroplus_3_bme280/state"
+    unit_of_measurement: "°C"
+    value_template: "{{ value_json.temperature }}"
+
+  - platform: mqtt
+    name: Enviro+ 3 BME280 Pressure
+    state_topic: "homeassistant/sensor/enviroplus_3_bme280/state"
+    unit_of_measurement: "MPa"
+    value_template: "{{ value_json.pressure }}"
+
+  - platform: mqtt
+    name: Enviro+ 3 BME280 Humidity
+    state_topic: "homeassistant/sensor/enviroplus_3_bme280/state"
+    unit_of_measurement: "%"
+    value_template: "{{ value_json.humidity }}"
+
+  # Enviro+ Module 3 MICS6814 (Gas) Measurements
+  - platform: mqtt
+    name: Enviro+ 3 Gas Oxidising
+    state_topic: "homeassistant/sensor/enviroplus_3_mics6814/state"
+    unit_of_measurement: "kO"
+    value_template: "{{ value_json.oxidising }}"
+
+  - platform: mqtt
+    name: Enviro+ 3 Gas Reducing
+    state_topic: "homeassistant/sensor/enviroplus_3_mics6814/state"
+    unit_of_measurement: "kO"
+    value_template: "{{ value_json.reducing }}"
+
+  - platform: mqtt
+    name: Enviro+ 3 Gas NH3
+    state_topic: "homeassistant/sensor/enviroplus_3_mics6814/state"
+    unit_of_measurement: "kO"
+    value_template: "{{ value_json.nh3 }}"
+
+# Input Boolean
+# https://www.home-assistant.io/integrations/input_boolean/
+
+input_boolean:
+  windows_open:
+    name: Windows open
+    icon: mdi:window-open-variant
+
+  heater_on:
+    name: Heater on
+    icon: mdi:radiator
+# Input Number
+# https://www.home-assistant.io/integrations/input_number/
+
+# input_number:
+#   target_temp:
+#     name: Target Heater Temperature Slider
+#     min: 1
+#     max: 30
+#     step: 1
+#     unit_of_measurement: step
+#     icon: mdi:target
+
+#   bedroom_brightness:
+#     name: Brightness
+#     initial: 254
+#     min: 0
+#     max: 254
+#     step: 1

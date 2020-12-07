@@ -1,0 +1,81 @@
+---
+# Package: People/Philip
+
+# Person
+# Enables Person Component
+# https://www.home-assistant.io/integrations/person/
+person:
+  - name: Philip
+    id: philip
+    user_id: c8500dd2d2f34a189b30d7f0190d9618
+    device_trackers:
+      # - device_tracker.f1f
+      - device_tracker.nokia_5_3
+
+# Customize
+
+# homeassistant:
+
+#   customize:
+
+#     device_tracker.nokia_5_3:
+#       friendly_name: Philip's Phone
+#       icon: mdi:cellphone-android
+#     # device_tracker.desktop_l53r83m_home_gateway:
+#     # sensor.laptop_philip:
+#     #   friendly_name: Philip's Laptop
+#     #   icon: mdi:laptop-windows
+
+# Binary Sensors
+
+binary_sensor:
+
+# Input Boolean
+
+input_boolean:
+  philip_home:
+    name: Philip at home
+    icon: mdi:home-account
+
+  philip_bed:
+    name: Philip in bed
+    icon: mdi:bed
+
+# Sensors
+
+sensor:
+  - platform: template
+    sensors:
+      philip_phone:
+        friendly_name: Philip's Phone
+        value_template: >-
+          {% if is_state('device_tracker.nokia_5_3', 'home') %}
+            Online
+          {% else %}
+            Offline
+          {% endif %}
+        icon_template: >-
+          {% if is_state('device_tracker.nokia_5_3', 'home') %}
+            mdi:cellphone-android
+          {% else %}
+            mdi:cellphone-off
+          {% endif %}
+
+      philip_laptop:
+        friendly_name: Philip's Laptop
+        value_template: >-
+          {% if is_state('device_tracker.desktop_l53r83m_home_gateway', 'home') %}
+            Online
+          {% else %}
+            Offline
+          {% endif %}
+        icon_template: >-
+          {% if is_state('device_tracker.desktop_l53r83m_home_gateway', 'home') %}
+            mdi:laptop
+          {% else %}
+            mdi:laptop-off
+          {% endif %}
+
+# Automations
+
+automation:

@@ -1,0 +1,178 @@
+---
+title: System
+icon: mdi:lan
+cards:
+  - type: entities
+    title: Network
+    entities:
+      - entity: sensor.myip
+        name: External IP
+
+  - type: entities
+    title: Host System
+    entities:
+      - entity: sensor.disk_use_percent
+        name: Disk Use
+      - entity: sensor.memory_use_percent
+        name: Memory Use
+      - entity: sensor.processor_use
+        name: Processor Use
+      - entity: sensor.ipv4_address_eth0
+        name: IP address
+      - entity: sensor.last_boot
+        name: Last boot
+
+  - type: entities
+    title: Host Resource Alert Inputs
+    entities:
+      - input_number.host_resource_utilisation_delay_seconds
+      - input_number.host_resource_utilisation_trigger
+
+  - type: glance
+    title: Home Assistant
+    entities:
+      - entity: sensor.uptime
+        name: Uptime
+      - entity: sensor.current_version
+        name: Version
+      - entity: binary_sensor.updater
+        name: Update
+      - entity: binary_sensor.potential_breaking_changes
+        name: Breaking changes
+
+  # TODO: use entity-filter card
+  - type: glance
+    title: Devices
+    entities:
+      - entity: sensor.enviro3
+      - entity: sensor.nextcloud
+      - entity: sensor.emonpi
+      - entity: sensor.television
+      - entity: sensor.chromecast
+      - entity: sensor.storology
+      - entity: sensor.ikea_gateway
+      - entity: sensor.printer
+      - entity: sensor.gateway
+
+  - type: vertical-stack
+    cards:
+      - type: entities
+        title: Speed Test
+        entities:
+          - entity: sensor.speedtest_ping
+            name: Ping
+          - entity: sensor.speedtest_download
+            name: Download
+          - entity: sensor.speedtest_upload
+            name: Upload
+      - type: history-graph
+        title: WAN Speed
+        entities:
+          - entity: sensor.speedtest_download
+            name: Download
+          - entity: sensor.speedtest_upload
+            name: Upload
+
+  - type: entities
+    title: UPS
+    entities:
+      - entity: sensor.myups_status
+        name: Status
+      - entity: sensor.myups_battery_charge
+        name: Battery Charge
+      - entity: sensor.myups_load
+        name: Load
+      - entity: sensor.myups_battery_runtime
+        name: Battery Runtime
+      - entity: sensor.myups_battery_voltage
+        name: Battery Voltage
+      - entity: sensor.myups_input_voltage
+        name: Input Voltage
+      # - entity: sensor.myups_high_voltage_transfer
+      # - entity: sensor.myups_input_power_sensitivity
+      # - entity: sensor.myups_nominal_battery_voltage
+      # - entity: sensor.myups_nominal_input_voltage
+      - entity: sensor.myups_battery_chemistry
+        name: Battery Chemistry
+      # - entity: sensor.myups_battery_date
+      #   name: Battery Date
+      - entity: sensor.myups_battery_manuf_date
+        name: Battery Manuf. Date
+
+  - type: conditional
+    conditions:
+      - entity: sensor.printer
+        state: "Online"
+    card:
+      type: entities
+      title: Brother MFC L2703DW
+      entities:
+        - entity: sensor.mfc_l2700dw_status
+          name: Status
+        - entity: sensor.mfc_l2700dw_black_toner_remaining
+          name: Toner remaining
+        - entity: sensor.mfc_l2700dw_drum_remaining_life
+          name: Drum remaining life
+        - entity: sensor.mfc_l2700dw_page_counter
+          name: Pages printed
+        - entity: sensor.mfc_l2700dw_uptime
+          name: Uptime
+
+  - type: conditional
+    conditions:
+      - entity: sensor.storology
+        state: "Online"
+    card:
+      type: entities
+      title: Storology
+      entities:
+        # NAS System Information
+        - entity: sensor.synology_cpu_load_total
+          name: CPU Load (Total)
+        - entity: sensor.synology_cpu_load_system
+          name: CPU Load (System)
+        - entity: sensor.synology_memory_usage_real
+          name: Memory Usage
+        - entity: sensor.synology_network_down
+          name: Network Download
+        - entity: sensor.synology_network_up
+          name: Network Upload
+        - entity: binary_sensor.storology_security_status
+          name: Security Status
+        # Volume Information
+        - entity: sensor.synology_status_volume_1
+          name: Volume Status
+        - entity: sensor.synology_volume_used_volume_1
+          name: Volume Used
+        - entity: sensor.synology_used_space_volume_1
+          name: Volume Space Used
+        - entity: sensor.synology_average_disk_temp_volume_1
+          name: Disk Temperature (avg)
+        - entity: sensor.synology_maximum_disk_temp_volume_1
+          name: Disk Temperature (max)
+        # Drive 1 Information
+        # - entity: sensor.synology_name_sda
+        #   name: Disk Name
+        # - entity: sensor.synology_drive_1_status
+        #   name: Status
+        - entity: sensor.synology_status_smart_sda
+          name: Drive 1 Status (SMART)
+        - entity: binary_sensor.storology_drive_1_below_min_remaining_life
+          name: Drive 1 Below Min Remaining Life
+        - entity: binary_sensor.storology_drive_1_exceeded_max_bad_sectors
+          name: Drive 1 Exceeded Max Bad Sectors
+        # - entity: sensor.synology_temperature_sda
+        #   name: Temperature
+        # Drive 2 Information
+        # - entity: sensor.synology_name_sdb
+        #   name: Disk Name
+        # - entity: sensor.synology_drive_2_status
+        #   name: Status
+        - entity: sensor.synology_status_smart_sdb
+          name: Drive 2 Status (SMART)
+        - entity: binary_sensor.storology_drive_2_below_min_remaining_life
+          name: Drive 2 Below Min Remaining Life
+        - entity: binary_sensor.storology_drive_2_exceeded_max_bad_sectors
+          name: Drive 2 Exceeded Max Bad Sectors
+        # - entity: sensor.synology_temperature_sdb
+        #   name: Temperature

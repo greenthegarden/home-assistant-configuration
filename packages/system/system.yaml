@@ -1,0 +1,158 @@
+---
+# Package: System
+
+# Customize
+# https://www.home-assistant.io/docs/configuration/customizing-devices/
+# Add an entry for each entity that you want to overwrite.
+
+homeassistant:
+  customize:
+    sensor.speedtest_download:
+      icon: mdi:download
+    sensor.speedtest_upload:
+      icon: mdi:upload
+    sensor.speedtest_ping:
+      icon: mdi:speedometer
+
+# Binary Sensors
+
+binary_sensor:
+
+# Sensors
+
+sensor:
+  # DNS IP
+  # Expose an IP address via DNS resolution
+  # https://www.home-assistant.io/integrations/dnsip/
+  # https://community.home-assistant.io/t/display-public-ip-notify-of-change/74655
+  # Own public IPv4 address
+  - platform: dnsip
+  # Resolve IP address of home-assistant.io via Google DNS
+  # - platform: dnsip
+  #   hostname: home-assistant.io
+  #   name: hass
+  #   resolver: 8.8.8.8
+
+  # System Monitor
+  # Monitor disk usage, memory usage, CPU usage, and running processes
+  # https://www.home-assistant.io/integrations/systemmonitor/
+  - platform: systemmonitor
+    resources:
+      - type: disk_use_percent
+        arg: /
+      - type: memory_use_percent
+      - type: memory_free
+      - type: processor_use
+      - type: last_boot
+      - type: ipv4_address
+        arg: eth0
+
+  # Uptime
+  # Time since the last Home Assistant restart
+  # https://www.home-assistant.io/integrations/uptime/
+  - platform: uptime
+    unit_of_measurement: days
+
+  # Version
+  # Current Home Assistant versions
+  # https://www.home-assistant.io/integrations/version/
+  - platform: version
+
+# Input Number
+# https://www.home-assistant.io/integrations/input_number/
+
+input_number:
+  host_resource_utilisation_delay_seconds:
+    name: Delay
+    min: 1
+    max: 120
+    step: 1
+    initial: 30
+    mode: slider
+    unit_of_measurement: seconds
+    icon: mdi:timer
+
+  host_resource_utilisation_trigger:
+    name: Utilisation Trigger
+    min: 0
+    max: 100
+    step: 5
+    initial: 70
+    mode: slider
+    unit_of_measurement: "%"
+    icon: mdi:network-strength-2-alert
+
+# Automations
+
+automation:
+  - alias: New Home Assistant version available
+    trigger:
+      platform: state
+      entity_id: binary_sensor.updater
+      from: "off"
+      to: "on"
+    action:
+      service: notify.telegram
+      data_template:
+        message: "Version {{ state_attr('binary_sensor.updater', 'newest_version') }} of Home Assistant is now available"
+    id: home_assistant_new_version
+
+  - alias: Notify when external IP changes
+    initial_state: on
+    trigger:
+      platform: state
+      entity_id: sensor.myip
+      # platform: event
+      # entity_id: sensor.myip
+      # event_type: state_changed
+    action:
+      service: notify.telegram
+      data_template:
+        message: "New external IP address is {{ states('sensor.myip') }}"
+    id: new_external_ip
+
+  - alias: Host memory utilisation too high
+    trigger:
+      platform: template
+      value_template: >
+        {{ states('sensor.memory_use_percent') | int > states('input_number.host_resource_utilisation_trigger') | int }}
+      for:
+        seconds: "{{ states('input_number.host_resource_utilisation_delay_seconds') | int }}"
+      # platform: numeric_state
+      # entity_id: sensor.memory_use_percent
+      # above: 50
+      # for:
+      #   seconds: "{{ states('input_number.host_resource_utilisation_delay_seconds') | int }}"
+    action:
+      service: notify.telegram
+      data_template:
+        message: "Host memory utilisation too high at {{ states('sensor.memory_use_percent') }}%"
+    id: host_memory_utilisation_too_high
+
+  - alias: Host processor utilisation too high
+    trigger:
+      platform: template
+      value_template: >
+        {{ states('sensor.processor_use') | int > states('input_number.host_resource_utilisation_trigger') | int }}
+      for:
+        seconds: "{{ states('input_number.host_resource_utilisation_delay_seconds') | int }}"
+    # trigger:
+    #   platform: numeric_state
+    #   entity_id: sensor.processor_use
+    #   above: 50
+    action:
+      service: notify.telegram
+      data_template:
+        message: "Host processor utilisation too high at {{ states('sensor.processor_use') }}%"
+    id: host_processor_utilisation_too_high
+
+  - alias: Host disk usage too high
+    trigger:
+      platform: numeric_state
+      entity_id: sensor.disk_use_percent
+      above: 50
+    action:
+      service: notify.telegram
+      data_template:
+        message: "Host disk usage too high at {{ states('sensor.disk_use_percent') }}%"
+    id: host_disk_usage_too_high
