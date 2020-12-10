@@ -65,6 +65,17 @@ cards:
     entity_pop_5: sensor.marden_rain_chance_5
     entity_fire_danger_summary: sensor.marden_fire_danger_0
     entity_uv_alert_summary: sensor.marden_uv_category_0
+  - type: entities
+    title: Current weather
+    entities:
+      - entity: sensor.adelaide_west_terrace_ngayirdapira_temp
+        name: Temp
+      - entity: sensor.adelaide_west_terrace_ngayirdapira_temp_feels_like
+        name: Feels like
+      - entity: sensor.adelaide_west_terrace_ngayirdapira_humidity
+        name: Humidity
+      - entity: sensor.adelaide_west_terrace_ngayirdapira_rain_since_9am
+        name: Rain since 9am
   - type: vertical-stack
     cards:
       - type: history-graph
@@ -84,17 +95,6 @@ cards:
             name: Current UV Index
           - entity: sensor.max_uv_index
             name: Maximum UV Index
-  - type: entities
-    title: Current weather
-    entities:
-      - entity: sensor.adelaide_west_terrace_ngayirdapira_temp
-        name: Temp
-      - entity: sensor.adelaide_west_terrace_ngayirdapira_temp_feels_like
-        name: Feels like
-      - entity: sensor.adelaide_west_terrace_ngayirdapira_humidity
-        name: Humidity
-      - entity: sensor.adelaide_west_terrace_ngayirdapira_rain_since_9am
-        name: Rain since 9am
   - type: vertical-stack
     cards:
       - type: history-graph
@@ -112,10 +112,10 @@ cards:
     # center_longitude: !secret home_longitude
   - type: "custom:bom-radar-card"
     frame_count: 10
-    center_latitude: -25.567607
-    center_longitude: 152.930597
-    marker_latitude: -26.175328
-    marker_longitude: 152.653189
+    center_latitude: !secret home_latitude
+    center_longitude: !secret home_longitude
+    marker_latitude: !secret home_latitude
+    marker_longitude: !secret home_longitude
     show_marker: true
     show_range: true
     show_zoom: true
