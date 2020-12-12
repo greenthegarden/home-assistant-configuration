@@ -5,41 +5,56 @@ mode: yaml
 # https://github.com/thomasloven/hass-config/wiki/Lovelace-Plugins
 
 resources:
+  - url: browser_mod.js?v=1
+    type: module
+
+  # consider putting into folders /local/bom-radar-card/bom-radar-card.js
   - url: /local/bom-radar-card.js?v=1
     type: module
 
   - url: /local/bom-weather-card.js?v=0.1
     type: module
 
-  - url: /browser_mod.js?v=1
-    type: module
-
+  # - type: module url: /hacsfiles/button-card/button-card.js
   - url: /local/button-card.js?v=3.4.0
     type: module
 
+  # - type: module url: /hacsfiles/lovelace-card-mod/card-mod.js
   - url: /local/card-mod.js?v=2.0.3
     type: module
 
+  # - type: module url: /hacsfiles/config-template-card/config-template-card.js
   - url: /local/config-template-card.js?v=1.3.0
     type: module
 
+  # - type: module url: /hacsfiles/lovelace-hui-element/hui-element.js
   - url: /local/hui-element.js?v=1
     type: module
 
+  # - type: module url: /hacsfiles/lovelace-layout-card/layout-card.js
   - url: /local/layout-card.js?v=16
     type: module
 
+  # - type: module url: /hacsfiles/mini-graph-card/mini-graph-card-bundle.js
   - url: /local/mini-graph-card-bundle.js?v=0.9.4
     type: module
 
   - url: /local/power-wheel-card.js?v=1
     type: module
 
+  # - type: module url: /hacsfiles/lovelace-state-switch/state-switch.js
   - url: /local/state-switch.js?v=8
     type: module
 
   - url: /local/sun-card.js?v=1
     type: module
 
+  # - type: module url: /hacsfiles/lovelace-time-picker-card/time-picker-card.js
   - url: /local/time-picker-card.js?v=1.1.1
     type: module
+
+  - url: https://fonts.googleapis.com/css?family=Oswald
+    type: css
+
+  - url: https://fonts.googleapis.com/css?family=Dosis
+    type: css

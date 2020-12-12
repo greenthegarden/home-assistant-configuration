@@ -10,5 +10,22 @@
     "**/.DS_Store": true,
     "**/*.db*": true,
     "**/*.log": true
+  },
+  "yaml.completion": true,
+  "yaml.customTags": [],
+  "yaml.format.bracketSpacing": true,
+  "yaml.format.enable": true,
+  "yaml.format.printWidth": 80,
+  "yaml.format.proseWrap": "always",
+  "yaml.format.singleQuote": false,
+  "yaml.hover": true,
+  "yaml.schemas": {},
+  "yaml.schemaStore.enable": true,
+  "yaml.validate": true,
+  "[yaml]": {
+    "editor.formatOnSave": true,
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2,
+    "editor.quickSuggestions": true
   }
 }
