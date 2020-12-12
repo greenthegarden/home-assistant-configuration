@@ -2,15 +2,44 @@
 # Enables the lovelace UI
 mode: yaml
 
+# https://github.com/thomasloven/hass-config/wiki/Lovelace-Plugins
+
 resources:
-  - url: /local/bom-radar-card.js
+  - url: /local/bom-radar-card.js?v=1
     type: module
 
   - url: /local/bom-weather-card.js?v=0.1
     type: module
 
+  - url: /browser_mod.js?v=1
+    type: module
+
+  - url: /local/button-card.js?v=3.4.0
+    type: module
+
+  - url: /local/card-mod.js?v=2.0.3
+    type: module
+
+  - url: /local/config-template-card.js?v=1.3.0
+    type: module
+
+  - url: /local/hui-element.js?v=1
+    type: module
+
+  - url: /local/layout-card.js?v=16
+    type: module
+
+  - url: /local/mini-graph-card-bundle.js?v=0.9.4
+    type: module
+
   - url: /local/power-wheel-card.js?v=1
     type: module
 
-  - url: /local/sun-card.js
+  - url: /local/state-switch.js?v=8
+    type: module
+
+  - url: /local/sun-card.js?v=1
+    type: module
+
+  - url: /local/time-picker-card.js?v=1.1.1
     type: module

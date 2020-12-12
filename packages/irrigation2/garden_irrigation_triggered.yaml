@@ -1,0 +1,98 @@
+#================
+#=== Automations
+#================
+automation:
+  #========================================================================
+  #=== Run a cycle if it is enabled and at the right time on the right day
+  #=== Or a Manual run is requested
+  #========================================================================
+  - alias: Irrigation Triggered
+
+    variables:
+      trigger_time: "{{ trigger.now.strftime('%H:%M:00') }}"
+
+    #================================================
+    #=== TRIGGERS
+    #===    At scheduled Cycle 1 or Cycle 2 Run Time
+    #===    Cycle 3 manually started
+    #================================================
+    trigger:
+      #=== Cycle 1 Start Time
+      - platform: time
+        at: input_datetime.irrigation_cycle1_start_time
+
+      #=== Cycle 2 Start Time
+      - platform: time
+        at: input_datetime.irrigation_cycle2_start_time
+
+      #=== Cycle 3 Manual Run
+      - platform: state
+        entity_id: input_boolean.irrigation_cycle3_running
+        to: "on"
+
+    #===================================================
+    #=== CONDITIONS
+    #===    Master Control switch must be On
+    #===    No other cycle is currently running
+    #===    The cycle is enabled
+    #===    It is not raining now if option is selected
+    #===================================================
+    condition:
+      #=== Only continue if Master Control Switch is on
+      - condition: state
+        entity_id: input_boolean.irrigation_master_control_switch
+        state: "on"
+
+      #=== Only continue if nothing is running
+      - condition: state
+        entity_id:
+          - input_boolean.irrigation_cycle1_running
+          - input_boolean.irrigation_cycle2_running
+          - input_boolean.irrigation_cycle3_running
+        state: "off"
+
+      #=== Check this cycle is enabled. NOTE: don't check this for cycle 3
+      - condition: template
+        value_template: >
+          {% if trigger_time == states('input_datetime.irrigation_cycle1_start_time') and
+                is_state('input_boolean.irrigation_cycle1_schedule_enabled', 'on') %}
+            True
+          {% elif trigger_time == states('input_datetime.irrigation_cycle2_start_time') and
+                is_state('input_boolean.irrigation_cycle2_schedule_enabled', 'on') %}
+            True
+          {% elif trigger.entity_id == 'input_boolean.irrigation_cycle3_running' %}
+            True
+          {% else %}
+            False
+          {% endif %}
+
+      #=== Check it is not raining if that option is enabled. NOTE: don't check this for cycle 3
+      - condition: template
+        value_template: >
+          {% if trigger.entity_id == 'input_boolean.irrigation_cycle3_running' %}
+            True
+          {% elif states('input_boolean.irrigation_ignore_schedule_if_raining') == 'off' %}
+            True
+          {% elif states('input_boolean.irrigation_ignore_schedule_if_raining') == 'on' and
+                  states(states('input_text.irrigation_external_sensor_raining_now')) == 'off' %}
+            True
+          {% else %}
+            False
+          {% endif %}
+
+    #===============================================
+    #=== ACTIONS
+    #===    Indicate to system that cycle is runing
+    #===============================================
+    action:
+      #== Set the cycle to be running
+      - service: homeassistant.turn_on
+        data_template:
+          entity_id: >
+            {% if trigger_time == states('input_datetime.irrigation_cycle1_start_time') %}
+              input_boolean.irrigation_cycle1_running
+            {% elif trigger_time == states('input_datetime.irrigation_cycle2_start_time') %}
+              input_boolean.irrigation_cycle2_running
+            {% else%}
+              input_boolean.irrigation_cycle3_running
+            {% endif %}

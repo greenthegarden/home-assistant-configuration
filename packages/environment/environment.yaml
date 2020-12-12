@@ -1,39 +1,21 @@
 ---
 # Package: Environment
 
-# Binary Sensors
-
-binary_sensor:
-
-# Sensors
-
-sensor:
-  # Average
-  # https://github.com/Limych/ha-average
-  - platform: average
-    name: "Average Temperature"
-    entities:
-      - sensor.adelaide_west_terrace_ngayirdapira_temp
-
-  # CO2 Signal
-  # CO2 intensity of a specific region
-  # https://www.home-assistant.io/integrations/co2signal/
-  - platform: co2signal
-    token: !secret co2signal_api_key
-    latitude: !secret home_latitude
-    longitude: !secret home_longitude
-
-  # World Air Quality Index
-  # https://www.home-assistant.io/integrations/waqi/
-  # sensor air_quality:
-  - platform: waqi
-    token: !secret waqi_token
-    locations:
-      - adelaide
-
 # Automations
 
 automation:
+  - alias: Cold weather Automations
+    trigger:
+      - platform: template
+        value_template: "{{ is_state('sensor.season', 'autumn') }}"
+      - platform: template
+        value_template: "{{ is_state('sensor.season', 'winter') }}"
+    action:
+      - service: homeassistant.turn_on
+        entity_id: automation.temperature_outside_higher_than_inside
+      - service: homeassistant.turn_off
+        entity_id: automation.temperature_outside_higher_than_inside
+
   - alias: Update OpenUV every 30 minutes during the daytime
     trigger:
       platform: time_pattern
@@ -71,3 +53,33 @@ automation:
     action:
       service: openuv.update_protection_data
     id: 28147d54978246eca2b71d730b82a732
+
+# Binary Sensors
+
+binary_sensor:
+
+# Sensors
+
+sensor:
+  # Average
+  # https://github.com/Limych/ha-average
+  - platform: average
+    name: "Average Temperature"
+    entities:
+      - sensor.adelaide_west_terrace_ngayirdapira_temp
+
+  # CO2 Signal
+  # CO2 intensity of a specific region
+  # https://www.home-assistant.io/integrations/co2signal/
+  - platform: co2signal
+    token: !secret co2signal_api_key
+    latitude: !secret home_latitude
+    longitude: !secret home_longitude
+
+  # World Air Quality Index
+  # https://www.home-assistant.io/integrations/waqi/
+  # sensor air_quality:
+  - platform: waqi
+    token: !secret waqi_token
+    locations:
+      - adelaide

@@ -1,11 +1,29 @@
 ---
 # Package: Celestial
 
+# Automations
+
+automation:
+  - alias: Phone battery low
+    trigger:
+      platform: numeric_state
+      entity_id: sensor.nokia_5_3_battery_level
+      below: 25
+    # action:
+    #   service: notify.telegram
+    #   data_template:
+    #     message: "Phone battery level at {{ sensor.nokia_5_3_battery_level }}%. Put on charge."
+    action:
+      service: notify.mobile_app_nokia_5_3
+      data_template:
+        message: "Phone battery level at {{ sensor.nokia_5_3_battery_level }}%. Put on charge."
+    id: phone_battery_low
+
 # Binary Sensors
 
 binary_sensor:
 
-# Sensors
+  # Sensors
 
 sensor:
   # Sensors - Template:

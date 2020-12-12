@@ -44,6 +44,10 @@ average:
 # https://github.com/custom-components/breaking_changes
 # breaking_changes:
 
+# browser_mod
+# https://github.com/thomasloven/hass-browser_mod
+browser_mod:
+
 # Bureau of Meteorology (BOM) (Custom Component)
 # https://github.com/bremor/bureau_of_meteorology
 bureau_of_meteorology:
@@ -186,6 +190,10 @@ logger:
 # Enables the lovelace UI
 # lovelace:
 #   mode: yaml
+
+# lovelace_gen
+# https://github.com/thomasloven/hass-lovelace_gen
+lovelace_gen:
 
 # Map
 # Enables a map showing the location of tracked devices

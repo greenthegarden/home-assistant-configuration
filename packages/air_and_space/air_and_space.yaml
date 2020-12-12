@@ -1,6 +1,19 @@
 ---
 # Package: Air and Space
 
+# Automations
+
+automation:
+  - alias: Flight entry notification
+    trigger:
+      platform: event
+      event_type: opensky_entry
+    action:
+      service: notify.telegram
+      data_template:
+        message: "Flight entry of {{ trigger.event.data.callsign }}"
+    id: flight_entry_notification
+
 # Customize
 
 homeassistant:
