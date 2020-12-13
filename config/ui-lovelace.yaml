@@ -14,3 +14,4 @@ views:
   # - !include lovelace/automations.yaml
   - !include lovelace/health.yaml
   - !include lovelace/docs.yaml
+  - !include lovelace/view_garden_version2.yaml

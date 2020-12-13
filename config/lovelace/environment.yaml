@@ -11,8 +11,10 @@ cards:
       sunset: sensor.sunset
       noon: sensor.solar_noon
       moon_phase: sensor.moon
+
   # - type: weather-forecast
   #   entity: weather.marden
+
   - type: "custom:bom-weather-card"
     title: BOM Weather
     entity_current_conditions: sensor.marden_icon_descriptor_0
@@ -41,17 +43,17 @@ cards:
     # # entity_visibility: If provided from a different source
     entity_daytime_high: sensor.bom_today_max
     entity_daytime_low: sensor.bom_today_min
-    # # entity_wind_bearing: sensor.adelaide_west_terrace_ngayirdapira_wind_direction
-    # # entity_wind_speed: sensor.adelaide_west_terrace_ngayirdapira_wind_speed
-    # # entity_wind_gust: sensor.adelaide_west_terrace_ngayirdapira_gust_speed
-    # # entity_wind_speed_kt: sensor.adelaide_west_terrace_ngayirdapira_wind_speed_knots
-    # # entity_wind_gust_kt: sensor.adelaide_west_terrace_ngayirdapira_gust_speed_knots
-    # entity_humidity: sensor.adelaide_west_terrace_ngayirdapira_humidity
-    # # entity_pressure: sensor.nodemcu_lounge_bme280_seapressure I get pressure from a NodeMCU. Bom does not supply this!
-    # entity_apparent_temp: sensor.adelaide_west_terrace_ngayirdapira_temperature_feels_like
+    entity_wind_bearing: sensor.adelaide_west_terrace_ngayirdapira_wind_direction
+    entity_wind_speed: sensor.adelaide_west_terrace_ngayirdapira_wind_speed
+    entity_wind_gust: sensor.adelaide_west_terrace_ngayirdapira_gust_speed
+    entity_wind_speed_kt: sensor.adelaide_west_terrace_ngayirdapira_wind_speed_knots
+    entity_wind_gust_kt: sensor.adelaide_west_terrace_ngayirdapira_gust_speed_knots
+    entity_humidity: sensor.adelaide_west_terrace_ngayirdapira_humidity
+    # entity_pressure: sensor.nodemcu_lounge_bme280_seapressure I get pressure from a NodeMCU. Bom does not supply this!
+    entity_apparent_temp: sensor.adelaide_west_terrace_ngayirdapira_temperature_feels_like
     entity_daily_summary: sensor.marden_extended_text_0
     entity_pop: sensor.marden_rain_chance_0
-    # entity_pop_intensity: sensor.adelaide_west_terrace_ngayirdapira_rain_since_9am
+    entity_pop_intensity: sensor.adelaide_west_terrace_ngayirdapira_rain_since_9am
     entity_possible_today: sensor.marden_rain_amount_range_0
     entity_pos_1: sensor.marden_rain_amount_range_1
     entity_pos_2: sensor.marden_rain_amount_range_2
@@ -65,6 +67,7 @@ cards:
     entity_pop_5: sensor.marden_rain_chance_5
     entity_fire_danger_summary: sensor.marden_fire_danger_0
     entity_uv_alert_summary: sensor.marden_uv_category_0
+
   - type: entities
     title: Current weather
     entities:
@@ -76,6 +79,7 @@ cards:
         name: Humidity
       - entity: sensor.adelaide_west_terrace_ngayirdapira_rain_since_9am
         name: Rain since 9am
+
   - type: vertical-stack
     cards:
       - type: history-graph
@@ -95,6 +99,7 @@ cards:
             name: Current UV Index
           - entity: sensor.max_uv_index
             name: Maximum UV Index
+
   - type: vertical-stack
     cards:
       - type: history-graph
@@ -108,8 +113,7 @@ cards:
         entities:
           - entity: sensor.waqi_adelaide_cbd
             name: Adelaide CDB
-    # center_latitude: !secret home_latitude
-    # center_longitude: !secret home_longitude
+
   - type: "custom:bom-radar-card"
     frame_count: 10
     center_latitude: !secret home_latitude
@@ -122,6 +126,7 @@ cards:
     show_recenter: true
     show_playback: true
     zoom_level: 8
+
   - type: vertical-stack
     cards:
       - type: entities
