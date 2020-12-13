@@ -21,7 +21,7 @@ homeassistant:
   # Select timezone from: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: !secret home_tz
 
-  customize: !include customize.yaml
+  # customize: !include customize.yaml
   # whitelist_external_dirs:
   #   - /data/homeassistant
   #   - /home/homeassistant/maps
@@ -38,7 +38,7 @@ homeassistant:
 
 # Average Sensor for Home Assistant
 # https://github.com/Limych/ha-average
-average:
+# average:
 
 # Breaking Changes
 # https://github.com/custom-components/breaking_changes
@@ -105,7 +105,7 @@ discovery:
 
 # Garbage Collection
 # https://github.com/bruxy70/Garbage-Collection
-garbage_collection:
+# garbage_collection:
 
 # Global Disaster Alert and Coordination System (GDACS)
 # Information about major droughts, earthquakes, floods,
@@ -211,20 +211,20 @@ mobile_app:
 
 # MQTT
 # https://www.home-assistant.io/docs/mqtt/
-mqtt:
-  client_id: home-assistant
-  broker: 192.168.1.53
-  port: 1883
-  # username: !secret mqtt_username
-  # password: !secret mqtt_password
-  discovery: true
-  discovery_prefix: homeassistant
-  birth_message:
-    topic: "hass/status"
-    payload: "online"
-  will_message:
-    topic: "hass/status"
-    payload: "offline"
+# mqtt:
+#   # client_id: home-assistant
+#   broker: 192.168.1.53
+#   port: 1883
+#   # username: !secret mqtt_username
+#   # password: !secret mqtt_password
+#   discovery: true
+#   discovery_prefix: homeassistant
+#   birth_message:
+#     topic: "hass/status"
+#     payload: "online"
+#   will_message:
+#     topic: "hass/status"
+#     payload: "offline"
 
 # Nextcloud
 # Pulls summary Nextcloud information into Home Assistant
@@ -245,7 +245,7 @@ notify:
 
 # OpenNEM
 # https://github.com/bacco007/sensor.opennem
-opennem:
+# opennem:
 
 # OpenUV
 # https://www.home-assistant.io/integrations/openuv/
@@ -256,18 +256,18 @@ opennem:
 # Person
 # Enables Person Component
 # https://www.home-assistant.io/integrations/person/
-person:
-  - name: Philip
-    id: philip
-    user_id: c8500dd2d2f34a189b30d7f0190d9618
-    device_trackers:
-      # - device_tracker.f1f
-      - device_tracker.nokia_5_3
-  - name: Thanh
-    id: thanh
-    # user_id: 55f67b8c6c9d4ee484f4cc70f062dd5c
-    device_trackers:
-      - device_tracker.oppo_r15_pro_home_gateway
+# person:
+#   - name: Philip
+#     id: philip
+#     # user_id: c8500dd2d2f34a189b30d7f0190d9618
+#     device_trackers:
+#       # - device_tracker.f1f
+#       - device_tracker.nokia_5_3
+#   - name: Thanh
+#     id: thanh
+#     # user_id: 55f67b8c6c9d4ee484f4cc70f062dd5c
+#     device_trackers:
+#       - device_tracker.oppo_r15_pro_home_gateway
 
 # Pi-hole
 # Retrieve statistics and interact with a Pi-hole system
@@ -284,6 +284,10 @@ person:
 # Responsible for storing details in a database, which then are handled by the history integration.
 # https://www.home-assistant.io/integrations/recorder/
 # recorder:
+
+# Scene
+# https://www.home-assistant.io/integrations/scene/
+scene:
 
 # Skyfield
 # https://github.com/partofthething/ha_skyfield
@@ -307,7 +311,7 @@ sun:
 
 # Sun2
 # https://github.com/pnbruckner/ha-sun2
-sun2:
+# sun2:
 
 # Synology DSM
 # Access to various statistics from a Synology NAS

@@ -53,6 +53,8 @@ resources:
   - url: /local/time-picker-card.js?v=1.1.1
     type: module
 
+  #=== FONTS
+
   - url: https://fonts.googleapis.com/css?family=Oswald
     type: css
 

@@ -11,6 +11,7 @@
 # home-assistant files
 .cloud
 .storage
+deps
 .HA_VERSION
 .uuid
 secrets.yaml

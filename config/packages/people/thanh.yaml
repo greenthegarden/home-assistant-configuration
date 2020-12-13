@@ -7,9 +7,9 @@
 person:
   - name: Thanh
     id: thanh
-    # user_id: 55f67b8c6c9d4ee484f4cc70f062dd5c
     device_trackers:
-      - device_tracker.android_496c94b5a1133736_home_gateway
+      # - device_tracker.android_496c94b5a1133736_home_gateway
+      - device_tracker.oppo_r15_pro_home_gateway
 
 # Binary Sensors
 
