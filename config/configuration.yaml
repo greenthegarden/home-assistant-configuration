@@ -307,11 +307,11 @@ speedtestdotnet:
 # Sun
 # Track the sun
 # https://www.home-assistant.io/integrations/sun/
-sun:
+# sun:
 
 # Sun2
 # https://github.com/pnbruckner/ha-sun2
-# sun2:
+sun2:
 
 # Synology DSM
 # Access to various statistics from a Synology NAS

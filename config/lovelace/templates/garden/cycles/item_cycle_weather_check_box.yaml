@@ -4,8 +4,8 @@
 #=== Schedule Weather Check Box
 #===============================
 type: custom:button-card
-entity: { { entity } }
-name: { { name } }
+entity: {{ entity }}
+name: {{ name }}
 icon: mdi:check-box-outline
 size: 60%
 styles:

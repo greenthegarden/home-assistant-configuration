@@ -7,10 +7,28 @@
 person:
   - name: Philip
     id: philip
-    user_id: c8500dd2d2f34a189b30d7f0190d9618
+    # user_id: c8500dd2d2f34a189b30d7f0190d9618
     device_trackers:
       # - device_tracker.f1f
       - device_tracker.nokia_5_3
+
+# Automations
+
+automation:
+  - alias: Phone battery low
+    trigger:
+      platform: numeric_state
+      entity_id: sensor.nokia_5_3_battery_level
+      below: 25
+    # action:
+    #   service: notify.telegram
+    #   data_template:
+    #     message: "Phone battery level at {{ sensor.nokia_5_3_battery_level }}%. Put on charge."
+    action:
+      service: notify.mobile_app_nokia_5_3
+      data_template:
+        message: "Phone battery level at {{ sensor.nokia_5_3_battery_level }}%. Put on charge."
+    id: phone_battery_low
 
 # Customize
 
@@ -20,11 +38,9 @@ person:
 
 #     device_tracker.nokia_5_3:
 #       friendly_name: Philip's Phone
-#       icon: mdi:cellphone-android
-#     # device_tracker.desktop_l53r83m_home_gateway:
-#     # sensor.laptop_philip:
-#     #   friendly_name: Philip's Laptop
-#     #   icon: mdi:laptop-windows
+#     device_tracker.desktop_l53r83m_home_gateway:
+#     sensor.laptop_philip:
+#       friendly_name: Philip's Laptop
 
 # Binary Sensors
 
@@ -75,7 +91,3 @@ sensor:
           {% else %}
             mdi:laptop-off
           {% endif %}
-
-# Automations
-
-automation:

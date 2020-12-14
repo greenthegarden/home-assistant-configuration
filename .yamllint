@@ -12,9 +12,13 @@ extends: default
 # Rules documentation: http://yamllint.readthedocs.io/en/latest/rules.html
 rules:
 
-  braces:
-    max-spaces-inside: 1
-    level: error
+#  braces:
+#    forbid: false
+#    min-spaces-inside: 0
+#    max-spaces-inside: 0
+#    min-spaces-inside-empty: -1
+#    max-spaces-inside-empty: -1
+#    level: error
 
   brackets:
     max-spaces-inside: 1
@@ -57,11 +61,17 @@ rules:
     level: warning
     allow-non-breakable-inline-mappings: true
 
-  new-line-at-end-of-file: disable
+  new-line-at-end-of-file: enable
 
   new-lines:
     type: unix
 
-  trailing-spaces: disable
+  quoted-strings:
+    quote-type: any
+    required: false
+    extra-required: []
+    extra-allowed: []
+
+  trailing-spaces: {}
 
   truthy: disable

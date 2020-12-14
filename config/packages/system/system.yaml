@@ -1,5 +1,11 @@
 ---
-# Package: System
+# Package: System/System
+
+# Breaking Changes
+# https://github.com/custom-components/breaking_changes
+breaking_changes:
+  name: potential_breaking_changes
+  scan_interval: 60
 
 # Customize
 # https://www.home-assistant.io/docs/configuration/customizing-devices/

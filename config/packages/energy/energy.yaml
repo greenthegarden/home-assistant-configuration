@@ -1,5 +1,5 @@
 ---
-# Package: Energy
+# Package: Energy/Energy
 
 # Customize
 
@@ -16,24 +16,25 @@ homeassistant:
       icon: mdi:current-ac
 
     # OpenNEM
-    sensor.opennem_sa1_battery_current_price:
-      friendly_name: Price
-    sensor.opennem_sa1_electricity_generation:
-      friendly_name: Eletricity Generation
-    sensor.opennem_sa1_electricity_demand:
-      friendly_name: Eletricity Demand
-    sensor.opennem_sa1_exported_power:
-      friendly_name: Exported Power
-    sensor.opennem_sa1_imported_power:
-      friendly_name: Imported Power
-    sensor.opennem_sa1_gen_from_renewables:
-      friendly_name: Generation from Renewables
-    sensor.opennem_sa1_gen_from_fossil_fuels:
-      friendly_name: Generation from Fossil Fuels
+
     sensor.opennem_sa1_battery_charging:
       friendly_name: Battery (Charging)
     sensor.opennem_sa1_battery_discharging:
       friendly_name: Battery (Discharging)
+    sensor.opennem_sa1_electricity_demand:
+      friendly_name: Eletricity Demand
+    sensor.opennem_sa1_electricity_generation:
+      friendly_name: Eletricity Generation
+    sensor.opennem_sa1_exported_power:
+      friendly_name: Exported Power
+    sensor.opennem_sa1_gen_from_fossil_fuels:
+      friendly_name: Generation from Fossil Fuels
+    sensor.opennem_sa1_gen_from_renewables:
+      friendly_name: Generation from Renewables
+    sensor.opennem_sa1_imported_power:
+      friendly_name: Imported Power
+    sensor.opennem_sa1_current_price:
+      friendly_name: Price
     sensor.opennem_sa1_solar_rooftop:
       friendly_name: Solar Rooftop
     sensor.opennem_sa1_solar_utility:
@@ -43,7 +44,7 @@ homeassistant:
 
 # Binary Sensors
 
-binary_sensor:
+# binary_sensor:
 
 # Sensors
 
@@ -88,22 +89,22 @@ sensor:
       - battery_charging
       - battery_discharging
       - biomass
-      - black_coal
-      - brown_coal
-      - exports
+      # - black_coal
+      # - brown_coal
       - demand
       - distillate
+      - exports
       - fossilfuel
-      - renewables
       - gas_ccgt
       - gas_ocgt
       - gas_recip
       - gas_steam
       - generation
-      - hydro
+      # - hydro
       - imports
       - price
       - pumps
+      - renewables
       - rooftop_solar
       - solar
       - temperature

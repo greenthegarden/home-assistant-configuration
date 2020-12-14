@@ -1,0 +1,22 @@
+---
+garbage_collection:
+  sensors:
+    - name: "Regular waste" # Each week on Monday and Wednesday. No collection on Christmas, added extra collection on the 27th
+      frequency: "weekly"
+      collection_days:
+        - fri
+      expire_after: "12:00"
+      exclude_dates:
+        - "2019-12-25"
+      include_dates:
+        - "2019-12-27"
+    - name: "Bio-waste" # Bi-weekly (odd weeks) on Thursday. Between March and November
+      frequency: "odd-weeks"
+      collection_days:
+        - fri
+    - name: Recycling # Every 4 weeks on Tuesday, starting on 4th week each year
+      frequency: "even-weeks"
+      collection_days: "fri"
+    - name: "Someone's Birthday"
+      frequency: "annual"
+      date: "11/24"

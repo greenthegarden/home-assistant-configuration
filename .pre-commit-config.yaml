@@ -36,6 +36,7 @@ repos:
     hooks:
       - id: prettier
         name: Format JSON, Markdown and YAML files
+        exclude: "config/custom_components|config/www|config/lovelace/templates/*"
         files: "\\.(\
           json\
           |md|markdown|mdown|mkdn\
@@ -49,6 +50,7 @@ repos:
     rev: v1.25.0
     hooks:
       - id: yamllint
+        exclude: "config/custom_components|config/www|config/lovelace/templates/*"
 
   - repo: https://github.com/igorshubovych/markdownlint-cli.git
     rev: v0.25.0

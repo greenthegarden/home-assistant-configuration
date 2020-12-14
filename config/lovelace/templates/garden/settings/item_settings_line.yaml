@@ -4,7 +4,7 @@
 #=== SETTINGS LINE
 #==================
 type: custom:button-card
-entity: { { entity } }
+entity: {{ entity }}
 show_state: true
 state_display: >
   [[[
@@ -20,10 +20,10 @@ state_display: >
     else
       return parseFloat(statestr).toFixed(round) + ' ' + unit_om;
   ]]]
-name: { { name } }
-icon: { { icon } }
+name: {{ name }}
+icon: {{ icon }}
 show_label: true
-label: { { label } }
+label: {{ label }}
 size: 30%
 styles:
   grid:
@@ -39,12 +39,12 @@ styles:
   card:
     - font-family: "[[[ return states['input_text.irrigation_ui_font_family'].state ]]]"
     - font-size: 15px
-    - padding: { { padding | default('0em 0em 0em 0em') } }
+    - padding: {{ padding | default('0em 0em 0em 0em') }}
     - background: none
     - box-shadow: none
   name:
     - justify-self: start
-    - padding: { { name_padding } }
+    - padding: {{ name_padding }}
   label:
     - justify-self: start
     - color: var(--secondary-text-color)
@@ -60,7 +60,7 @@ state:
 
 #=== Tap Action
 tap_action:
-  action: { { tap_action | default('call-service') } }
+  action: {{ tap_action | default('call-service') }}
   service: browser_mod.popup
   service_data:
     title: >
@@ -73,9 +73,9 @@ tap_action:
     card:
       type: entities
       entities:
-        - entity: { { entity } }
-          name: { { name } }
-          icon: { { icon } }
+        - entity: {{ entity }}
+          name: {{ name }}
+          icon: {{ icon }}
       style: >
         ha-card {
           font-family: {% raw %}{{ states('input_text.irrigation_ui_font_family') }}{% endraw %};

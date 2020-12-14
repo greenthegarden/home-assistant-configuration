@@ -4,7 +4,7 @@
 #=== SMARTWEATHER STATION CHECK BOX
 #===================================
 type: custom:button-card
-entity: { { entity } }
+entity: {{ entity }}
 name: >
   [[[
     var entity = '{{ entity }}';

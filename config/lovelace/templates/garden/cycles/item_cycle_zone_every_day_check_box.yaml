@@ -4,7 +4,7 @@
 #=== Schedule Zone Every Day Check Box
 #======================================
 type: custom:button-card
-entity: { { entity } }
+entity: {{ entity }}
 name: Every<br>day
 icon: mdi:check-box-outline
 size: 70%

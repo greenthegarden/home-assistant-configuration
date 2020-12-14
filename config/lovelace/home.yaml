@@ -8,9 +8,18 @@ cards:
     entities:
       - entity: binary_sensor.people_home
         name: People home
+
+  - type: entities
+    entities:
+      - sensor.general_waste
+      - sensor.bio
+      - sensor.paper
+      - sensor.plastic
+
   - type: light
     name: Porch Light
     entity: light.light
+
   - type: vertical-stack
     cards:
       - type: entities
@@ -51,10 +60,13 @@ cards:
       #       name: Sun
       #     # - entity: binary_sensor.iss
       #     #   name: ISS Visible
+
   - type: weather-forecast
     entity: weather.marden
+
   # - type: picture-entity
   #   entity: camera.iss_map
+
   # - type: entities
   #   title: Indoor Air Quality
   #   entities:
@@ -64,6 +76,7 @@ cards:
   #       name: Reducing
   #     - entity: sensor.enviro_3_gas_nh3
   #       name: NH3
+
   - type: vertical-stack
     cards:
       - type: entities
@@ -95,19 +108,23 @@ cards:
             name: Reducing
           - entity: sensor.enviro_3_gas_nh3
             name: NH3
+
   - type: history-graph
     title: Temperature
     hours_to_show: 2
     entities:
       - entity: sensor.enviro_3_bme280_temperature
         name: Indoor
+
   - type: sensor
     entity: sensor.current_uv_index
     name: UV Index
     graph: line
     hours_to_show: 12
+
   - type: media-control
     entity: media_player.castology
+
   - type: entities
     title: Device Access Links
     show_header_toggle: false
