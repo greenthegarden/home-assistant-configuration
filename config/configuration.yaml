@@ -238,10 +238,10 @@ mobile_app:
 # https://www.home-assistant.io/integrations/notify/
 # Notifier for Telegram
 # https://www.wouterbulten.nl/blog/tech/talking-to-my-house-telegram-homeassistant-bot/
-notify:
-  - name: telegram
-    platform: telegram
-    chat_id: !secret telegram_bot_main_chat_id
+# notify:
+#   - name: telegram
+#     platform: telegram
+#     chat_id: !secret telegram_bot_main_chat_id
 
 # OpenNEM
 # https://github.com/bacco007/sensor.opennem
@@ -304,23 +304,14 @@ speedtestdotnet:
     - download
     - upload
 
-# Sun
-# Track the sun
-# https://www.home-assistant.io/integrations/sun/
-# sun:
-
-# Sun2
-# https://github.com/pnbruckner/ha-sun2
-sun2:
-
 # Synology DSM
 # Access to various statistics from a Synology NAS
 # https://www.home-assistant.io/integrations/synology_dsm/
-synology_dsm:
-  - host: 192.168.1.100
-    port: 5001
-    username: !secret synology_dsm_username
-    password: !secret synology_dsm_password
+# synology_dsm:
+#   - host: 192.168.1.100
+#     port: 5001
+#     username: !secret synology_dsm_username
+#     password: !secret synology_dsm_password
 
 # System Health
 # Provides an API to offer information on the system and its components
@@ -331,10 +322,10 @@ system_health:
 # https://www.home-assistant.io/integrations/telegram/
 # https://www.wouterbulten.nl/blog/tech/talking-to-my-house-telegram-homeassistant-bot/
 # telegram_bot: !include telegram.yaml
-telegram_bot:
-  - platform: polling
-    api_key: !secret telegram_bot_api_key
-    allowed_chat_ids: !secret telegram_bot_chat_ids
+# telegram_bot:
+#   - platform: polling
+#     api_key: !secret telegram_bot_api_key
+#     allowed_chat_ids: !secret telegram_bot_chat_ids
 
 # Text-to-Speech
 # https://www.home-assistant.io/integrations/#text-to-speech
@@ -349,7 +340,7 @@ tradfri:
 
 # UI Logs
 # https://github.com/custom-components/uilogs
-# uilogs:
+uilogs:
 
 # Updater
 # Checks for available updates

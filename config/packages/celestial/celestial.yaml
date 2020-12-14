@@ -1,6 +1,15 @@
 ---
 # Package: Celestial
 
+# Sun
+# Track the sun
+# https://www.home-assistant.io/integrations/sun/
+sun:
+
+# Sun2
+# https://github.com/pnbruckner/ha-sun2
+sun2:
+
 # Binary Sensors
 
 binary_sensor:

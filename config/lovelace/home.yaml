@@ -10,11 +10,11 @@ cards:
         name: People home
 
   - type: entities
+    title: Bin collection
     entities:
-      - sensor.general_waste
-      - sensor.bio
-      - sensor.paper
-      - sensor.plastic
+      - sensor.regular_waste
+      - sensor.bio_waste
+      - sensor.recycling
 
   - type: light
     name: Porch Light

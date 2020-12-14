@@ -1,4 +1,6 @@
 ---
+# Garbage Collection
+# https://github.com/bruxy70/Garbage-Collection
 garbage_collection:
   sensors:
     - name: "Regular waste" # Each week on Monday and Wednesday. No collection on Christmas, added extra collection on the 27th
