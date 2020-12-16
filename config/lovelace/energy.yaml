@@ -62,6 +62,8 @@ cards:
         entities:
           - entity: sensor.emoncms2_vrms
             name: Voltage
+          - entity: sensor.average_voltage
+            name: Average
       - type: entities
         title: South Australia Energy
         entities:

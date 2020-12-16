@@ -37,8 +37,11 @@ cards:
         name: Version
       - entity: binary_sensor.updater
         name: Update
-      - entity: binary_sensor.potential_breaking_changes
-        name: Breaking changes
+
+  - type: entities
+    title: Breaking Changes
+    entities:
+      - binary_sensor.potential_breaking_changes
 
   # TODO: use entity-filter card
   - type: glance
