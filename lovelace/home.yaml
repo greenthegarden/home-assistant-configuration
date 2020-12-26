@@ -12,8 +12,8 @@ cards:
   - type: entities
     title: Bin collection
     entities:
-      - sensor.regular_waste
-      - sensor.bio_waste
+      - sensor.general_waste
+      - sensor.green_waste
       - sensor.recycling
 
   - type: light

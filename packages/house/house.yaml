@@ -49,6 +49,21 @@ sensor:
     unit_of_measurement: "kO"
     value_template: "{{ value_json.nh3 }}"
 
+  - platform: template
+    sensors:
+      indoor_temperature:
+        friendly_name: "Indoor Temperature"
+        unit_of_measurement: "°C"
+        value_template: "{{ state_attr('sensor.enviroplus_3_bme280_temperature') }}"
+      indoor_humidity:
+        friendly_name: "Indoor Humidity"
+        unit_of_measurement: "%"
+        value_template: "{{ state_attr('sensor.enviroplus_3_bme280_humidity') }}"
+      indoor_pressure:
+        friendly_name: "Indoor Pressure"
+        unit_of_measurement: "MPa"
+        value_template: "{{ state_attr('sensor.enviroplus_3_bme280_pressure') }}"
+
 # Input Boolean
 # https://www.home-assistant.io/integrations/input_boolean/
 

@@ -11,17 +11,17 @@ garbage_collection:
       include_dates:
         - "2020-12-26"
       verbose_state: true
-      verbose_format: "in {days} days"
+      verbose_format: "On {date} (in {days} days)"
     - name: "Green waste" # Bi-weekly (odd weeks) on Thursday. Between March and November
       frequency: "odd-weeks"
       collection_days: "fri"
       verbose_state: true
-      verbose_format: "in {days} days"
+      verbose_format: "On {date} (in {days} days)"
     - name: Recycling # Every 4 weeks on Tuesday, starting on 4th week each year
       frequency: "even-weeks"
       collection_days: "fri"
       verbose_state: true
-      verbose_format: "in {days} days"
+      verbose_format: "On {date} (in {days} days)"
     - name: "Someone's Birthday"
       frequency: "annual"
       date: "11/24"
