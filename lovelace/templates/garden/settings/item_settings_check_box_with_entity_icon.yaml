@@ -5,10 +5,10 @@
 #=======================================
 type: custom:button-card
 color_type: icon
-entity: { { entity } }
+entity: {{ entity }}
 show_state: false
 show_name: true
-name: { { name } }
+name: {{ name }}
 show_icon: true
 size: 50%
 tap_action:
@@ -44,13 +44,13 @@ custom_fields:
     ]]]
 state:
   - value: "on"
-    name: { { on_name } }
+    name: {{ on_name }}
     styles:
       card:
         - background-color: var(--primary-background-color)
         - border: 1px solid var(--accent-color)
   - value: "off"
-    name: { { off_name } }
+    name: {{ off_name }}
     styles:
       card:
         - color: var(--secondary-text-color)

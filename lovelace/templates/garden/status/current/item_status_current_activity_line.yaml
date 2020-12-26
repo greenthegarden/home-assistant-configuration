@@ -4,7 +4,7 @@
 #===  Button to show zone activity
 #==================================
 type: custom:button-card
-entity: { { entity } }
+entity: {{ entity }}
 icon: mdi:sprinkler-variant
 size: 60%
 show_state: true

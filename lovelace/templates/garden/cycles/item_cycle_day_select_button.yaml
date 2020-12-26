@@ -4,9 +4,9 @@
 #=== Schedule Day Select Button
 #===============================
 type: custom:button-card
-entity: { { entity } }
+entity: {{ entity }}
 show_icon: false
-name: { { name } }
+name: {{ name }}
 styles:
   card:
     - font-family: "[[[ return states['input_text.irrigation_ui_font_family'].state ]]]"

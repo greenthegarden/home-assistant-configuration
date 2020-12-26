@@ -13,7 +13,7 @@ entities:
       #=================
       - !include
         - item_cycle_header.yaml
-        - cycle: { { cycle } }
+        - cycle: {{ cycle }}
 
       - type: custom:hui-element
         row_type: divider
@@ -27,7 +27,7 @@ entities:
           - !include
             - item_cycle_start_time.yaml
             - entity: sensor.irrigation_cycle{{ cycle }}_start_time_in_seconds
-              cycle: { { cycle } }
+              cycle: {{ cycle }}
 
           - type: vertical-stack
             cards:
@@ -49,49 +49,49 @@ entities:
       #=== Zone 1
       - !include
         - item_cycle_zone_duration_line.yaml
-        - cycle: { { cycle } }
+        - cycle: {{ cycle }}
           zone: 1
 
       #=== Zone 2
       - !include
         - item_cycle_zone_duration_line.yaml
-        - cycle: { { cycle } }
+        - cycle: {{ cycle }}
           zone: 2
 
       #=== Zone 3
       - !include
         - item_cycle_zone_duration_line.yaml
-        - cycle: { { cycle } }
+        - cycle: {{ cycle }}
           zone: 3
 
       #=== Zone 4
       - !include
         - item_cycle_zone_duration_line.yaml
-        - cycle: { { cycle } }
+        - cycle: {{ cycle }}
           zone: 4
 
       #=== Zone 5
       - !include
         - item_cycle_zone_duration_line.yaml
-        - cycle: { { cycle } }
+        - cycle: {{ cycle }}
           zone: 5
 
       #=== Zone 6
       - !include
         - item_cycle_zone_duration_line.yaml
-        - cycle: { { cycle } }
+        - cycle: {{ cycle }}
           zone: 6
 
       #=== Zone 7
       - !include
         - item_cycle_zone_duration_line.yaml
-        - cycle: { { cycle } }
+        - cycle: {{ cycle }}
           zone: 7
 
       #=== Zone 8
       - !include
         - item_cycle_zone_duration_line.yaml
-        - cycle: { { cycle } }
+        - cycle: {{ cycle }}
           zone: 8
 
 style: >
