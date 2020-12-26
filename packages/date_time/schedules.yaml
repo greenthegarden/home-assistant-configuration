@@ -1,0 +1,27 @@
+---
+# Garbage Collection
+# https://github.com/bruxy70/Garbage-Collection
+garbage_collection:
+  sensors:
+    - name: "General waste" # Each week on Monday and Wednesday. No collection on Christmas, added extra collection on the 27th
+      frequency: "weekly"
+      collection_days: fri
+      exclude_dates:
+        - "2020-12-25"
+      include_dates:
+        - "2020-12-26"
+      verbose_state: true
+      verbose_format: "in {days} days"
+    - name: "Green waste" # Bi-weekly (odd weeks) on Thursday. Between March and November
+      frequency: "odd-weeks"
+      collection_days: "fri"
+      verbose_state: true
+      verbose_format: "in {days} days"
+    - name: Recycling # Every 4 weeks on Tuesday, starting on 4th week each year
+      frequency: "even-weeks"
+      collection_days: "fri"
+      verbose_state: true
+      verbose_format: "in {days} days"
+    - name: "Someone's Birthday"
+      frequency: "annual"
+      date: "11/24"
